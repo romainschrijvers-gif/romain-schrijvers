@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr" class="page-projet">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intelligent Document Processing (IDP) — PROVEXI | Romain SCHRIJVERS</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/projet-detail.css">
+</head>
+<body>
+
+  <!-- Navigation retour -->
+  <nav class="projet-nav" aria-label="Navigation projet">
+    <a href="../index.html" class="projet-nav-back">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Retour au portfolio
+    </a>
+    <span class="projet-nav-title">PROVEXI — IDP</span>
+  </nav>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="projet-hero projet-reveal">
+      <span class="projet-hero-badge">Projet suivi — Junior-Entreprise</span>
+      <h1 class="projet-hero-titre">Intelligent Document Processing (IDP)</h1>
+      <p class="projet-hero-description">
+        Solution modulaire de traitement automatique de documents techniques avec OCR
+        et règles d'extraction adaptables, développée pour PROVEXI dans le cadre
+        d'une mission Junior-Entreprise.
+      </p>
+      <ul class="projet-hero-tags">
+        <li class="tag">IA</li>
+        <li class="tag">OCR</li>
+        <li class="tag">Automatisation</li>
+        <li class="tag">Document Processing</li>
+      </ul>
+    </section>
+
+    <!-- Image cover -->
+    <div class="projet-cover projet-reveal">
+      <img src="../assets/images/projets/projet-idp.svg" alt="Visuel du projet IDP" class="projet-cover-img">
+    </div>
+
+    <!-- Contexte -->
+    <section class="projet-section projet-reveal">
+      <span class="projet-section-label">Contexte</span>
+      <h2 class="projet-section-titre">Contexte du projet</h2>
+      <p>
+        PROVEXI gère un volume important de documents techniques hétérogènes
+        (bons de livraison, factures, fiches techniques) dont le traitement manuel
+        mobilise un temps considérable et génère des erreurs de saisie.
+      </p>
+      <p>
+        J'ai piloté la mission de bout en bout : qualification du besoin client,
+        définition du périmètre fonctionnel, coordination des développeurs et
+        suivi qualité jusqu'à la livraison finale.
+      </p>
+    </section>
+
+    <div class="projet-divider"><hr></div>
+
+    <!-- Objectifs -->
+    <section class="projet-section projet-reveal">
+      <span class="projet-section-label">Objectifs</span>
+      <h2 class="projet-section-titre">Objectifs du projet</h2>
+      <ul class="projet-objectifs">
+        <li>Concevoir un moteur OCR capable de lire des documents numérisés de qualité variable</li>
+        <li>Implémenter des règles d'extraction adaptables selon le type de document</li>
+        <li>Structurer les données extraites dans des formats standards (JSON, CSV)</li>
+        <li>Assurer une architecture modulaire permettant l'ajout de nouveaux types de documents</li>
+        <li>Livrer une solution déployable en environnement de production</li>
+      </ul>
+    </section>
+
+    <div class="projet-divider"><hr></div>
+
+    <!-- Réalisation -->
+    <section class="projet-section projet-reveal">
+      <span class="projet-section-label">Réalisation</span>
+      <h2 class="projet-section-titre">Réalisation &amp; visuels</h2>
+      <p>
+        La solution IDP combine un module OCR (Tesseract), un moteur de règles
+        configurables et une couche de post-traitement pour normaliser les données
+        extraites. L'ensemble est orchestré via un pipeline Python modulaire.
+      </p>
+      <div class="projet-galerie">
+        <figure class="projet-galerie-item projet-galerie-item--full">
+          <img src="../assets/images/projets/projet-idp.svg" alt="Architecture IDP" class="projet-galerie-img">
+          <figcaption class="projet-galerie-caption">Architecture modulaire du pipeline IDP</figcaption>
+        </figure>
+        <figure class="projet-galerie-item">
+          <img src="../assets/images/projets/portfolio.jpg" alt="OCR en action" class="projet-galerie-img">
+          <figcaption class="projet-galerie-caption">Extraction OCR sur document numérisé</figcaption>
+        </figure>
+        <figure class="projet-galerie-item">
+          <img src="../assets/images/projets/portfolio.jpg" alt="Données structurées" class="projet-galerie-img">
+          <figcaption class="projet-galerie-caption">Données structurées en sortie</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <div class="projet-divider"><hr></div>
+
+    <!-- Technologies -->
+    <section class="projet-section projet-reveal">
+      <span class="projet-section-label">Technologies</span>
+      <h2 class="projet-section-titre">Stack technique</h2>
+      <div class="projet-tech">
+        <span class="projet-tech-tag"><span class="projet-tech-dot"></span>Python</span>
+        <span class="projet-tech-tag"><span class="projet-tech-dot"></span>Tesseract OCR</span>
+        <span class="projet-tech-tag"><span class="projet-tech-dot"></span>Regex / Règles</span>
+        <span class="projet-tech-tag"><span class="projet-tech-dot"></span>JSON / CSV</span>
+        <span class="projet-tech-tag"><span class="projet-tech-dot"></span>Pipeline modulaire</span>
+      </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <footer class="projet-footer projet-reveal">
+      <p class="projet-footer-text">Découvrir les autres projets</p>
+      <a href="../index.html" class="projet-footer-cta">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Retour au portfolio
+      </a>
+    </footer>
+
+  </main>
+
+  <script src="../js/projet-detail.js"></script>
+</body>
+</html>

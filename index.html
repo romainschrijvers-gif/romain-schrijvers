@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Romain SCHRIJVERS — Portfolio</title>
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+<!-- SVG clipPath invisible — hexagone aux bords très légèrement arrondis -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <clipPath id="hex-clip" clipPathUnits="objectBoundingBox">
+      <path d="M0.473,0.013 Q0.5,0,0.527,0.013 L0.973,0.237 Q1,0.25,1,0.28 L1,0.72 Q1,0.75,0.973,0.763 L0.527,0.987 Q0.5,1,0.473,0.987 L0.027,0.763 Q0,0.75,0,0.72 L0,0.28 Q0,0.25,0.027,0.237 Z" />
+    </clipPath>
+  </defs>
+</svg>
+
+  <main class="page-wrapper">
+
+    <!-- ============================================================
+         PAGE 1 — ACCUEIL
+         ============================================================ -->
+    <section class="page-section page-section--accueil">
+
+      <!-- Orbes décoratives animées -->
+      <div class="hero-orb hero-orb--blue" aria-hidden="true"></div>
+      <div class="hero-orb hero-orb--gold" aria-hidden="true"></div>
+      <div class="hero-orb hero-orb--soft" aria-hidden="true"></div>
+
+      <!-- Portrait en arrière-plan intégré -->
+      <div class="hero-portrait-bg" aria-hidden="true">
+        <img src="assets/images/portrait/portrait.png" alt="" class="hero-portrait-img">
+      </div>
+
+      <!-- Grain overlay -->
+      <div class="hero-grain" aria-hidden="true"></div>
+
+      <div class="accueil-content">
+        <span class="hero-badge">Open to Opportunities</span>
+
+        <h1 class="accueil-nom">
+          Transformer la donnée<br>
+          en levier de<br>
+          <span class="accueil-nom-accent">performance.</span>
+        </h1>
+
+        <p class="accueil-sous-accroche">
+          Ingénieur informatique &amp; business<br>
+          Développement full-stack, IA, CRM, automatisation et intégration au service des enjeux métiers.
+        </p>
+
+
+        <div class="hero-cta-row">
+          <a href="mailto:romain.schrijvers@gmail.com" class="hero-cta">Me contacter</a>
+          <a href="https://www.linkedin.com/in/romain-schrijvers-95aa00262/" class="hero-cta-secondary" target="_blank" rel="noopener noreferrer">LinkedIn →</a>
+        </div>
+
+        <div class="hero-proof">
+          <div class="hero-proof-logos">
+            <img src="assets/images/logos/logo-insa.png" alt="INSA Lyon" class="hero-proof-logo">
+            <span class="hero-proof-sep"></span>
+            <img src="assets/images/logos/logo-etic.png" alt="ETIC INSA Technologies" class="hero-proof-logo">
+          </div>
+          <span class="hero-proof-text">INSA Lyon · ETIC INSA Technologies</span>
+        </div>
+      </div>
+
+      <div class="hero-scroll-hint" aria-hidden="true">
+        <span>Scroll</span>
+        <svg width="16" height="24" viewBox="0 0 16 24" fill="none"><path d="M8 4v12m0 0l-4-4m4 4l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
+    </section>
+
+    <!-- ============================================================
+         PAGE 2 — PROJETS SUIVIS (JUNIOR-ENTREPRISE)
+         ============================================================ -->
+    <section class="page-section page-section--projets-suivis">
+
+      <div class="projets-suivis-content">
+
+        <header class="section-header">
+          <h2 class="section-title">Projets suivis</h2>
+          <p class="section-contexte">
+            Projets réalisés dans un cadre de chef de projet,
+            avec un rôle de prospection, cadrage fonctionnel, chiffrage, négociation,
+            suivi et coordination technique.
+          </p>
+        </header>
+
+        <div class="chiffres-cles">
+
+          <!-- Graph 1 : Barre verticale — montant financier -->
+          <div class="chiffre-cle-graph chiffre-cle-graph--bar">
+            <div class="chiffre-cle-bar-wrap">
+              <div class="chiffre-cle-bar" data-height="85"></div>
+            </div>
+            <div class="chiffre-cle-label">
+              <span class="chiffre-cle-valeur">+100k</span>
+              <span class="chiffre-cle-unite">€</span>
+            </div>
+          </div>
+
+          <!-- Graph 2 : Blocs empilés — volume de projets -->
+          <div class="chiffre-cle-graph chiffre-cle-graph--blocks">
+            <div class="chiffre-cle-blocks-wrap">
+              <div class="chiffre-cle-block" data-delay="1"></div>
+              <div class="chiffre-cle-block" data-delay="2"></div>
+              <div class="chiffre-cle-block" data-delay="3"></div>
+              <div class="chiffre-cle-block" data-delay="4"></div>
+              <div class="chiffre-cle-block" data-delay="5"></div>
+            </div>
+            <div class="chiffre-cle-label">
+              <span class="chiffre-cle-valeur">+10</span>
+              <span class="chiffre-cle-unite">projets</span>
+            </div>
+          </div>
+
+          <!-- Graph 3 : Anneau segmenté — diversification -->
+          <div class="chiffre-cle-graph chiffre-cle-graph--ring">
+            <div class="chiffre-cle-ring-wrap">
+              <svg class="chiffre-cle-ring" viewBox="0 0 80 80">
+                <circle class="ring-segment ring-segment--1" cx="40" cy="40" r="30" stroke-dashoffset="0" />
+                <circle class="ring-segment ring-segment--2" cx="40" cy="40" r="30" stroke-dashoffset="-63" />
+                <circle class="ring-segment ring-segment--3" cx="40" cy="40" r="30" stroke-dashoffset="-126" />
+              </svg>
+            </div>
+            <div class="chiffre-cle-label">
+              <span class="chiffre-cle-valeur">+3</span>
+              <span class="chiffre-cle-unite">piliers</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="projets-grid projets-grid--trois">
+
+          <!-- Projet 1 — CEA -->
+          <article class="projet-card">
+            <div class="projet-card-visuels">
+              <img src="assets/images/logos/logo-cea.png" alt="Logo CEA" class="projet-card-image">
+            </div>
+            <div class="projet-card-body">
+              <h3 class="projet-card-titre">Extraction intelligente d'exigences — CEA</h3>
+              <p class="projet-card-description">
+                Automatisation de l'identification d'exigences dans des cahiers
+                des charges complexes via un pipeline IA sécurisé.
+              </p>
+              <ul class="projet-card-tags">
+                <li class="tag">Python</li>
+                <li class="tag">LangChain</li>
+                <li class="tag">Docker</li>
+                <li class="tag">FastAPI</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Projet 2 — ATEXO -->
+          <article class="projet-card">
+            <div class="projet-card-visuels">
+              <img src="assets/images/logos/logo-atexo.png" alt="Logo ATEXO" class="projet-card-image">
+            </div>
+            <div class="projet-card-body">
+              <h3 class="projet-card-titre">POC IA – Analyse d'appels d'offres publics — ATEXO</h3>
+              <p class="projet-card-description">
+                POC IA pour extraire et structurer automatiquement
+                les informations clés de dossiers de candidature.
+              </p>
+              <ul class="projet-card-tags">
+                <li class="tag">RAG</li>
+                <li class="tag">LLM</li>
+                <li class="tag">NLP</li>
+                <li class="tag">PostgreSQL</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Projet 3 — PROVEXI -->
+          <article class="projet-card">
+            <div class="projet-card-visuels">
+              <img src="assets/images/logos/logo-provexi.png" alt="Logo PROVEXI" class="projet-card-image">
+            </div>
+            <div class="projet-card-body">
+              <h3 class="projet-card-titre">Intelligent Document Processing (IDP)</h3>
+              <p class="projet-card-description">
+                Solution modulaire de traitement automatique de documents techniques
+                avec OCR et règles d'extraction adaptables.
+              </p>
+              <ul class="projet-card-tags">
+                <li class="tag">OCR</li>
+                <li class="tag">FastAPI</li>
+                <li class="tag">OpenRouter</li>
+                <li class="tag">Streamlit</li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ============================================================
+         PAGE 3 — PROJETS PERSONNELS
+         ============================================================ -->
+    <section class="page-section page-section--projets-personnels">
+
+      <div class="projets-personnels-content">
+
+        <header class="section-header">
+          <h2 class="section-title">Projets personnels</h2>
+          <p class="section-contexte">
+            Projets développés de bout en bout,
+            avec un focus sur l'automatisation, la fiabilité
+            et le gain de temps métier.
+          </p>
+        </header>
+
+        <div class="projets-grid projets-grid--trois">
+
+          <!-- Projet 1 — LinkedIn / PB -->
+          <article class="projet-card">
+            <div class="projet-card-visuels">
+              <img src="assets/images/logos/logo-pb.jpeg" alt="Logo PB" class="projet-card-image">
+            </div>
+            <div class="projet-card-body">
+              <h3 class="projet-card-titre">Scripts Python – Structuration de données LinkedIn</h3>
+              <p class="projet-card-description">
+                Scripts Python permettant de collecter, nettoyer
+                et reformater automatiquement les données de profils LinkedIn
+                pour entreprise de Research Talent dans des fichiers Excel exploitables.
+              </p>
+              <ul class="projet-card-tags">
+                <li class="tag">Pandas</li>
+                <li class="tag">python-pptx</li>
+                <li class="tag">openpyxl</li>
+                <li class="tag">lxml</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Projet 2 — Propale Bot / ETIC -->
+          <article class="projet-card">
+            <div class="projet-card-visuels">
+              <img src="assets/images/logos/logo-etic.png" alt="Logo ETIC" class="projet-card-image">
+            </div>
+            <div class="projet-card-body">
+              <h3 class="projet-card-titre">Propale Bot – Automatisation commerciale</h3>
+              <p class="projet-card-description">
+                Outil interne automatisant la génération de propositions commerciales,
+                contrats, mises à jour CRM et contenus associés via IA.
+              </p>
+              <ul class="projet-card-tags">
+                <li class="tag">OpenAI API</li>
+                <li class="tag">Google Apps Script</li>
+                <li class="tag">Docker</li>
+                <li class="tag">OVH</li>
+                <li class="tag">API HubSpot</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Projet 3 — ESSI / Feux de forêt -->
+          <article class="projet-card">
+            <div class="projet-card-visuels">
+              <img src="assets/images/projets/feu_capteurs.jpeg" alt="Capteur IoT feux de forêt" class="projet-card-image">
+            </div>
+            <div class="projet-card-body">
+              <h3 class="projet-card-titre">Système IoT de prévention des feux de forêt — ESSI</h3>
+              <p class="projet-card-description">
+                Réseau de capteurs environnementaux (température, humidité, CO₂, particules fines)
+                avec transmission LoRaWAN optimisée et visualisation temps réel,
+                intégrant des seuils de détection intelligents basés sur l'IFM.
+              </p>
+              <ul class="projet-card-tags">
+                <li class="tag">IoT</li>
+                <li class="tag">LoRaWAN</li>
+                <li class="tag">HTML / CSS</li>
+                <li class="tag">JavaScript</li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ============================================================
+         PAGE 4 — À PROPOS
+         ============================================================ -->
+    <section class="page-section page-section--a-propos">
+
+      <div class="a-propos-content">
+
+        <div class="a-propos-header">
+          <div class="a-propos-visuels">
+            <div class="a-propos-logo a-propos-logo--left">
+              <img src="assets/images/logos/logo-insa.png" alt="Logo INSA Lyon" class="logo logo--insa">
+            </div>
+            <div class="a-propos-photo">
+              <img src="assets/images/portrait/portrait.png" alt="Photo de Romain SCHRIJVERS" class="photo photo--portrait">
+            </div>
+            <div class="a-propos-logo a-propos-logo--right">
+              <img src="assets/images/logos/logo-etic.png" alt="Logo ETIC INSA Technologies" class="logo logo--etic">
+            </div>
+          </div>
+        </div>
+
+        <div class="a-propos-bandeau">
+
+          <nav class="a-propos-tabs" aria-label="Sections À propos">
+            <button class="a-propos-tab a-propos-tab--active" aria-selected="true" aria-controls="tab-panel-insa">
+              INSA Lyon
+            </button>
+            <span class="a-propos-separator" aria-hidden="true"></span>
+            <button class="a-propos-tab" aria-selected="false" aria-controls="tab-panel-etic">
+              ETIC INSA Technologies
+            </button>
+            <span class="a-propos-separator" aria-hidden="true"></span>
+            <button class="a-propos-tab" aria-selected="false" aria-controls="tab-panel-sport">
+              Sport haut niveau
+            </button>
+          </nav>
+
+          <!-- Panel INSA Lyon (actif par défaut) -->
+          <div class="a-propos-panel a-propos-panel--active" id="tab-panel-insa" role="tabpanel">
+            <div class="a-propos-panel-col a-propos-panel-col--text">
+              <p></p>
+            </div>
+            <div class="a-propos-panel-col a-propos-panel-col--highlights">
+              <h4 class="a-propos-highlights-title"></h4>
+              <ul class="a-propos-highlights-list"></ul>
+            </div>
+            <div class="a-propos-panel-image">
+              <img src="" alt="Illustration INSA Lyon" class="a-propos-illustration">
+            </div>
+          </div>
+
+          <!-- Panel ETIC INSA Technologies -->
+          <div class="a-propos-panel" id="tab-panel-etic" role="tabpanel" hidden>
+            <div class="a-propos-panel-col a-propos-panel-col--text">
+              <p></p>
+            </div>
+            <div class="a-propos-panel-col a-propos-panel-col--highlights">
+              <h4 class="a-propos-highlights-title"></h4>
+              <ul class="a-propos-highlights-list"></ul>
+            </div>
+            <div class="a-propos-panel-image">
+              <img src="" alt="Illustration ETIC INSA Technologies" class="a-propos-illustration">
+            </div>
+          </div>
+
+          <!-- Panel Sport haut niveau -->
+          <div class="a-propos-panel" id="tab-panel-sport" role="tabpanel" hidden>
+            <div class="a-propos-panel-col a-propos-panel-col--text">
+              <p></p>
+            </div>
+            <div class="a-propos-panel-col a-propos-panel-col--highlights">
+              <h4 class="a-propos-highlights-title"></h4>
+              <ul class="a-propos-highlights-list"></ul>
+            </div>
+            <div class="a-propos-panel-image">
+              <img src="" alt="Illustration Sport haut niveau" class="a-propos-illustration">
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ============================================================
+         PAGE 5 — CONTACT
+         ============================================================ -->
+    <section class="page-section page-section--contact">
+
+      <!-- Orbes décoratives (même style que hero) -->
+      <div class="contact-orb contact-orb--blue" aria-hidden="true"></div>
+      <div class="contact-orb contact-orb--gold" aria-hidden="true"></div>
+
+      <div class="contact-content">
+        <span class="hero-badge">Parlons-en</span>
+        <p class="contact-message">Un projet, une opportunité<br>ou simplement envie d'échanger ?</p>
+        <a href="mailto:romain.schrijvers@gmail.com" class="hero-cta">
+          romain.schrijvers@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/romain-schrijvers-95aa00262/" class="hero-cta-secondary" target="_blank" rel="noopener noreferrer">
+          LinkedIn →
+        </a>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

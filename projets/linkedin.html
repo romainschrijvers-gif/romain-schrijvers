@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr" class="page-projet">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scripts Python – Structuration de données LinkedIn | Romain SCHRIJVERS</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/projet-detail.css">
+</head>
+<body>
+
+  <!-- Navigation retour -->
+  <nav class="projet-nav" aria-label="Navigation projet">
+    <a href="../index.html" class="projet-nav-back">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Retour au portfolio
+    </a>
+    <span class="projet-nav-title">LinkedIn Data — Scripts Python</span>
+  </nav>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="projet-hero projet-reveal">
+      <span class="projet-hero-badge">Projet personnel</span>
+      <h1 class="projet-hero-titre">Scripts Python – Structuration de données LinkedIn</h1>
+      <p class="projet-hero-description">
+        Scripts Python permettant de collecter, nettoyer et reformater automatiquement
+        les données de profils LinkedIn pour une entreprise de Research Talent,
+        générant des fichiers Excel exploitables et normalisés.
+      </p>
+      <ul class="projet-hero-tags">
+        <li class="tag">Python</li>
+        <li class="tag">Data</li>
+        <li class="tag">Automatisation</li>
+        <li class="tag">Excel</li>
+      </ul>
+    </section>
+
+    <!-- Image cover -->
+    <div class="projet-cover projet-reveal">
+      <img src="../assets/images/projets/projet-linkedin.svg" alt="Visuel du projet LinkedIn Data" class="projet-cover-img">
+    </div>
+
+    <!-- Contexte -->
+    <section class="projet-section projet-reveal">
+      <span class="projet-section-label">Contexte</span>
+      <h2 class="projet-section-titre">Contexte du projet</h2>
+      <p>
+        Une entreprise de Research Talent avait besoin de structurer des données
+        issues de profils LinkedIn pour alimenter ses processus de sourcing.
+        Le traitement manuel de ces données représentait un volume horaire
+        considérable avec un risque d'erreur élevé.
+      </p>
+      <p>
+        J'ai développé ce projet de bout en bout, de la conception à la livraison,
+        en autonomie complète. L'outil est aujourd'hui utilisé en production par
+        les équipes de l'entreprise.
+      </p>
+    </section>
+
+    <div class="projet-divider"><hr></div>
+
+    <!-- Objectifs -->
+    <section class="projet-section projet-reveal">
+      <span class="projet-section-label">Objectifs</span>
+      <h2 class="projet-section-titre">Objectifs du projet</h2>
+      <ul class="projet-objectifs">
+        <li>Automatiser la collecte et le nettoyage de données de profils LinkedIn</li>
+        <li>Normaliser les informations hétérogènes (postes, compétences, formations)</li>
+        <li>Générer des fichiers Excel structurés et directement exploitables</li>
+        <li>Réduire le temps de traitement de plusieurs heures à quelques minutes</li>
+        <li>Fournir un outil fiable, réutilisable et documenté</li>
+      </ul>
+    </section>
+
+    <div class="projet-divider"><hr></div>
+
+    <!-- Réalisation -->
+    <section class="projet-section projet-reveal">
+      <span class="projet-section-label">Réalisation</span>
+      <h2 class="projet-section-titre">Réalisation &amp; visuels</h2>
+      <p>
+        Les scripts Python combinent des modules de parsing, de nettoyage
+        (expressions régulières, normalisation textuelle) et de génération
+        Excel via openpyxl. Le tout est orchestré par un script principal
+        configurable selon les besoins du client.
+      </p>
+      <div class="projet-galerie">
+        <figure class="projet-galerie-item projet-galerie-item--full">
+          <img src="../assets/images/projets/projet-linkedin.svg" alt="Workflow de traitement" class="projet-galerie-img">
+          <figcaption class="projet-galerie-caption">Workflow de collecte et structuration des données</figcaption>
+        </figure>
+        <figure class="projet-galerie-item">
+          <img src="../assets/images/projets/portfolio.jpg" alt="Données brutes vs structurées" class="projet-galerie-img">
+          <figcaption class="projet-galerie-caption">Données brutes transformées en fichier structuré</figcaption>
+        </figure>
+        <figure class="projet-galerie-item">
+          <img src="../assets/images/projets/portfolio.jpg" alt="Fichier Excel généré" class="projet-galerie-img">
+          <figcaption class="projet-galerie-caption">Fichier Excel final exploitable</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <div class="projet-divider"><hr></div>
+
+    <!-- Technologies -->
+    <section class="projet-section projet-reveal">
+      <span class="projet-section-label">Technologies</span>
+      <h2 class="projet-section-titre">Stack technique</h2>
+      <div class="projet-tech">
+        <span class="projet-tech-tag"><span class="projet-tech-dot"></span>Python</span>
+        <span class="projet-tech-tag"><span class="projet-tech-dot"></span>openpyxl</span>
+        <span class="projet-tech-tag"><span class="projet-tech-dot"></span>Regex</span>
+        <span class="projet-tech-tag"><span class="projet-tech-dot"></span>Data Cleaning</span>
+        <span class="projet-tech-tag"><span class="projet-tech-dot"></span>Excel / CSV</span>
+      </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <footer class="projet-footer projet-reveal">
+      <p class="projet-footer-text">Découvrir les autres projets</p>
+      <a href="../index.html" class="projet-footer-cta">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Retour au portfolio
+      </a>
+    </footer>
+
+  </main>
+
+  <script src="../js/projet-detail.js"></script>
+</body>
+</html>

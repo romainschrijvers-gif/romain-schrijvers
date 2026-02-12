@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">
+  <rect width="120" height="120" rx="8" fill="#1A1A1A"/>
+  <rect x="1" y="1" width="118" height="118" rx="7" fill="none" stroke="#333" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="60" y="55" text-anchor="middle" fill="#666" font-family="Inter, sans-serif" font-size="11" font-weight="600">LOGO</text>
+  <text x="60" y="72" text-anchor="middle" fill="#E8613A" font-family="Inter, sans-serif" font-size="13" font-weight="700">ATEXO</text>
+</svg>

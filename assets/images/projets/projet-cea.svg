@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <rect width="600" height="400" rx="12" fill="#1A1A1A"/>
+  <rect x="2" y="2" width="596" height="396" rx="10" fill="none" stroke="#333" stroke-width="2" stroke-dasharray="8 4"/>
+  <text x="300" y="185" text-anchor="middle" fill="#666" font-family="Inter, sans-serif" font-size="14" font-weight="600">IMAGE PROJET</text>
+  <text x="300" y="210" text-anchor="middle" fill="#E8613A" font-family="Inter, sans-serif" font-size="18" font-weight="700">Extraction exigences — CEA</text>
+  <text x="300" y="235" text-anchor="middle" fill="#444" font-family="Inter, sans-serif" font-size="12">600 × 400 · .png ou .jpg</text>
+</svg>
