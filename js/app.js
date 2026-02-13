@@ -1,9 +1,8 @@
 /* ============================================================
    APP.JS — Portfolio Romain SCHRIJVERS
    ============================================================
-   Script principal unifié.
-   Gère : snap navigation, nav header, dots, toast,
-   formes décoratives, tabs, contenu placeholder.
+   Snap navigation, nav header (+ hamburger mobile),
+   dots, touch swipe, tabs, contenu à propos.
    ============================================================ */
 
 (function () {
@@ -12,27 +11,27 @@
   var sections = document.querySelectorAll('.page-section');
   if (!sections.length) return;
 
-  var SECTION_LABELS = [
-    'Accueil',
-    'Projets suivis',
-    'Projets personnels',
-    'À propos',
-    'Contact'
-  ];
+  var SECTION_LABELS = ['Accueil', 'Projets suivis', 'Projets personnels', 'À propos', 'Contact'];
+  var DARK_SECTIONS  = [0, 2]; // indices des sections sombres (hors dernière, gérée dynamiquement)
 
-  var currentIndex = 0;
-  var toastTimer = null;
-  var isScrolling = false;
+  var currentIndex    = 0;
+  var isScrolling     = false;
   var SCROLL_COOLDOWN = 1200;
   var wheelAccumulator = 0;
-  var wheelTimer = null;
-  var WHEEL_THRESHOLD = 50;
+  var wheelTimer       = null;
+  var WHEEL_THRESHOLD  = 50;
+  var isMobile         = false;
+
+  function checkMobile() {
+    isMobile = window.innerWidth <= 768;
+  }
+  checkMobile();
+  window.addEventListener('resize', checkMobile);
 
 
   /* ==================================================================
-     SNAP NAVIGATION — programmatic section jumps
+     SNAP NAVIGATION
      ================================================================== */
-
   function goToSection(index) {
     if (index < 0 || index >= sections.length) return;
     if (index === currentIndex || isScrolling) return;
@@ -41,22 +40,18 @@
     currentIndex = index;
     sections[index].scrollIntoView({ behavior: 'smooth' });
 
-    setTimeout(function () {
-      isScrolling = false;
-    }, SCROLL_COOLDOWN);
+    setTimeout(function () { isScrolling = false; }, SCROLL_COOLDOWN);
   }
 
-  /* Wheel — accumulate delta, fire only once per gesture */
+  /* Wheel — desktop uniquement */
   document.addEventListener('wheel', function (e) {
+    if (isMobile) return;
     e.preventDefault();
     if (isScrolling) return;
 
     wheelAccumulator += e.deltaY;
-
     clearTimeout(wheelTimer);
-    wheelTimer = setTimeout(function () {
-      wheelAccumulator = 0;
-    }, 200);
+    wheelTimer = setTimeout(function () { wheelAccumulator = 0; }, 200);
 
     if (Math.abs(wheelAccumulator) >= WHEEL_THRESHOLD) {
       var dir = wheelAccumulator > 0 ? 1 : -1;
@@ -66,25 +61,52 @@
     }
   }, { passive: false });
 
-  /* Keyboard — arrows, page up/down, space */
+  /* Keyboard */
   document.addEventListener('keydown', function (e) {
+    if (isMobile) return;
     var dir = 0;
     if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') dir = 1;
-    if (e.key === 'ArrowUp' || e.key === 'PageUp') dir = -1;
+    if (e.key === 'ArrowUp'   || e.key === 'PageUp') dir = -1;
     if (!dir) return;
     e.preventDefault();
     goToSection(currentIndex + dir);
   });
 
+  /* Touch swipe — desktop snap mode only */
+  var touchStartY = 0;
+  document.addEventListener('touchstart', function (e) {
+    if (isMobile) return;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', function (e) {
+    if (isMobile) return;
+    var diff = touchStartY - e.changedTouches[0].clientY;
+    if (Math.abs(diff) > 60) {
+      goToSection(currentIndex + (diff > 0 ? 1 : -1));
+    }
+  }, { passive: true });
+
 
   /* ==================================================================
-     INJECTION — NAVIGATION HEADER
+     NAVIGATION HEADER
      ================================================================== */
   function injectNav() {
     var nav = document.createElement('nav');
     nav.className = 'site-nav';
     nav.setAttribute('aria-label', 'Navigation principale');
 
+    /* Hamburger button (mobile) */
+    var hamburger = document.createElement('button');
+    hamburger.className = 'nav-hamburger';
+    hamburger.setAttribute('aria-label', 'Menu');
+    hamburger.innerHTML = '<span></span><span></span><span></span>';
+    hamburger.addEventListener('click', function () {
+      nav.classList.toggle('nav-open');
+    });
+    nav.appendChild(hamburger);
+
+    /* Links */
     SECTION_LABELS.forEach(function (label, i) {
       if (i > 0) {
         var sep = document.createElement('span');
@@ -101,14 +123,20 @@
       a.dataset.index = i;
       a.addEventListener('click', function (e) {
         e.preventDefault();
-        goToSection(i);
+        nav.classList.remove('nav-open');
+
+        if (isMobile) {
+          sections[i].scrollIntoView({ behavior: 'smooth' });
+          currentIndex = i;
+        } else {
+          goToSection(i);
+        }
       });
       nav.appendChild(a);
     });
 
     document.body.prepend(nav);
 
-    /* Animate nav entrance on page load */
     requestAnimationFrame(function () {
       nav.classList.add('is-visible');
       nav.classList.add('site-nav--dark');
@@ -119,7 +147,7 @@
 
 
   /* ==================================================================
-     INJECTION — INDICATEUR DE SECTION (DOTS)
+     DOTS INDICATOR
      ================================================================== */
   function injectIndicator() {
     var wrap = document.createElement('div');
@@ -130,9 +158,7 @@
       var dot = document.createElement('span');
       dot.className = 'section-indicator-dot';
       if (i === 0) dot.classList.add('section-indicator-dot--active');
-      dot.addEventListener('click', function () {
-        goToSection(i);
-      });
+      dot.addEventListener('click', function () { goToSection(i); });
       wrap.appendChild(dot);
     });
 
@@ -142,27 +168,7 @@
 
 
   /* ==================================================================
-     INJECTION — TOAST DE SECTION
-     ================================================================== */
-  function injectToast() {
-    var toast = document.createElement('div');
-    toast.className = 'section-toast';
-    toast.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(toast);
-    return toast;
-  }
-
-
-  /* ==================================================================
-     INJECTION — FORME DÉCORATIVE HERO (désactivée — nouveau hero immersif)
-     ================================================================== */
-  function injectHeroShape() {
-    /* No-op: hero shapes are now in HTML */
-  }
-
-
-  /* ==================================================================
-     INJECTION — FORME DÉCORATIVE À PROPOS
+     DECORATIVE SHAPE — À PROPOS
      ================================================================== */
   function injectAboutShape() {
     var photoWrap = document.querySelector('.a-propos-photo');
@@ -177,7 +183,7 @@
 
 
   /* ==================================================================
-     INJECTION — TITRE « À PROPOS »
+     TITRE « À PROPOS » (injecté)
      ================================================================== */
   function injectAboutTitle() {
     var content = document.querySelector('.a-propos-content');
@@ -190,10 +196,10 @@
 
 
   /* ==================================================================
-     TAB SWITCHING — À PROPOS
+     TABS — À PROPOS
      ================================================================== */
   function initTabs() {
-    var tabs = document.querySelectorAll('.a-propos-tab');
+    var tabs   = document.querySelectorAll('.a-propos-tab');
     var panels = document.querySelectorAll('.a-propos-panel');
     if (!tabs.length) return;
 
@@ -211,8 +217,7 @@
         tab.classList.add('a-propos-tab--active');
         tab.setAttribute('aria-selected', 'true');
 
-        var panelId = tab.getAttribute('aria-controls');
-        var panel = document.getElementById(panelId);
+        var panel = document.getElementById(tab.getAttribute('aria-controls'));
         if (panel) {
           panel.classList.add('a-propos-panel--active');
           panel.hidden = false;
@@ -223,7 +228,7 @@
 
 
   /* ==================================================================
-     CONTENU PLACEHOLDER — À PROPOS
+     CONTENU — À PROPOS
      ================================================================== */
   function fillAboutContent() {
     var content = {
@@ -264,8 +269,8 @@
     };
 
     var tabImages = {
-      'tab-panel-insa': 'assets/images/About_me/insa_about.jpg',
-      'tab-panel-etic': 'assets/images/About_me/etic_about.JPG',
+      'tab-panel-insa':  'assets/images/About_me/insa_about.jpg',
+      'tab-panel-etic':  'assets/images/About_me/etic_about.JPG',
       'tab-panel-sport': 'assets/images/About_me/sport_about.JPG'
     };
 
@@ -273,15 +278,12 @@
       var panel = document.getElementById(id);
       if (!panel) return;
 
-      /* Text column */
       var textP = panel.querySelector('.a-propos-panel-col--text p');
       if (textP) textP.innerHTML = content[id].text.replace(/\n/g, '<br>');
 
-      /* Highlights title */
       var hTitle = panel.querySelector('.a-propos-highlights-title');
       if (hTitle) hTitle.textContent = content[id].highlightsTitle;
 
-      /* Highlights list */
       var hList = panel.querySelector('.a-propos-highlights-list');
       if (hList) {
         hList.innerHTML = '';
@@ -292,21 +294,19 @@
         });
       }
 
-      /* Image */
       var imgEl = panel.querySelector('.a-propos-illustration');
-      if (imgEl) {
-        imgEl.setAttribute('src', tabImages[id] || '');
-      }
+      if (imgEl) imgEl.setAttribute('src', tabImages[id] || '');
     });
   }
 
 
   /* ==================================================================
-     SCROLL OBSERVER — section tracking & animations
+     SCROLL OBSERVER
      ================================================================== */
-  function initObserver(nav, indicator, toast) {
+  function initObserver(nav, indicator) {
     var navLinks = nav ? nav.querySelectorAll('.site-nav-link') : [];
-    var dots = indicator ? indicator.querySelectorAll('.section-indicator-dot') : [];
+    var dots     = indicator ? indicator.querySelectorAll('.section-indicator-dot') : [];
+    var lastIdx  = sections.length - 1;
 
     if (!('IntersectionObserver' in window)) {
       sections.forEach(function (s) { s.classList.add('is-visible'); });
@@ -323,38 +323,27 @@
           if (idx !== currentIndex) {
             currentIndex = idx;
 
-            /* Nav — active link */
+            /* Active link */
             navLinks.forEach(function (l, i) {
               l.classList.toggle('is-active', i === idx);
             });
 
-            /* Nav — dark mode on dark-bg sections (hero, projets suivis, projets perso, contact) */
+            /* Nav dark/light — dark sur sections sombres */
             if (nav) {
-              nav.classList.toggle('site-nav--dark', idx === 0 || idx === 2 || idx === sections.length - 1);
+              var isDark = DARK_SECTIONS.indexOf(idx) !== -1 || idx === lastIdx;
+              nav.classList.toggle('site-nav--dark', isDark);
             }
 
-            /* Dots — active dot */
+            /* Active dot */
             dots.forEach(function (d, i) {
               d.classList.toggle('section-indicator-dot--active', i === idx);
             });
-
-            /* Toast — show section name */
-            if (toast) {
-              toast.textContent = SECTION_LABELS[idx] || '';
-              toast.classList.add('is-active');
-              clearTimeout(toastTimer);
-              toastTimer = setTimeout(function () {
-                toast.classList.remove('is-active');
-              }, 1200);
-            }
           }
         } else {
           entry.target.classList.remove('is-visible');
         }
       });
-    }, {
-      threshold: 0.35
-    });
+    }, { threshold: 0.35 });
 
     sections.forEach(function (s) { observer.observe(s); });
   }
@@ -363,17 +352,14 @@
   /* ==================================================================
      INIT
      ================================================================== */
-  var nav = injectNav();
+  var nav       = injectNav();
   var indicator = injectIndicator();
-  var toast = injectToast();
 
-  injectHeroShape();
   injectAboutShape();
   injectAboutTitle();
   initTabs();
   fillAboutContent();
-
-  initObserver(nav, indicator, toast);
+  initObserver(nav, indicator);
 
   /* First section visible immediately */
   sections[0].classList.add('is-visible');

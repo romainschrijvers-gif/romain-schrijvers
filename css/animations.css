@@ -1,17 +1,13 @@
 /* ============================================================
    ANIMATIONS — Portfolio Romain SCHRIJVERS
    ============================================================
-   Couche motion-design, complémentaire au layout.
-   Principes : opacity + transform uniquement, easing naturels,
-   durées courtes, tout désactivable via prefers-reduced-motion.
+   Motion-design : opacity + transform uniquement.
+   Tout désactivable via prefers-reduced-motion.
    ============================================================ */
 
 
-/* ============================================================
-   0. KEYFRAMES
+/* 0. KEYFRAMES
    ============================================================ */
-
-/* Flottement vertical — logo décoratif, lent, amplitude marquée */
 @keyframes float-slow {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-12px); }
@@ -22,7 +18,6 @@
   50%      { transform: translateY(12px); }
 }
 
-/* Orbe drift — mouvement organique lent */
 @keyframes orb-drift-1 {
   0%, 100% { transform: translate(0, 0) scale(1); }
   33%      { transform: translate(30px, -20px) scale(1.05); }
@@ -40,19 +35,14 @@
   50%      { transform: translateY(-50%) scale(1.08) translateX(20px); }
 }
 
-/* Scroll bounce */
 @keyframes scroll-bounce {
   0%, 100% { transform: translateY(0); opacity: 0.35; }
   50%      { transform: translateY(6px); opacity: 0.7; }
 }
 
 
-/* ============================================================
-   1. SCROLL — REVEAL D'ENTRÉE DE SECTION
-   ============================================================
-   Chaque section démarre masquée (opacity 0, léger décalage Y).
-   La classe .is-visible est ajoutée par IntersectionObserver.   */
-
+/* 1. SCROLL REVEAL — Entrée de section
+   ============================================================ */
 .page-section > *:first-child {
   opacity: 0;
   transform: translateY(12px);
@@ -67,22 +57,12 @@
 }
 
 
-/* ============================================================
-   2. PAGE 1 — HERO IMMERSIF : ENTRÉES & ORBES
+/* 2. HERO — Orbes & entrées séquentielles
    ============================================================ */
+.page-section.is-visible .hero-orb--blue { animation: orb-drift-1 14s ease-in-out infinite; }
+.page-section.is-visible .hero-orb--gold { animation: orb-drift-2 16s ease-in-out infinite; }
+.page-section.is-visible .hero-orb--soft { animation: orb-drift-3 12s ease-in-out infinite; }
 
-/* Orbes : drift infini */
-.page-section.is-visible .hero-orb--blue {
-  animation: orb-drift-1 14s ease-in-out infinite;
-}
-.page-section.is-visible .hero-orb--gold {
-  animation: orb-drift-2 16s ease-in-out infinite;
-}
-.page-section.is-visible .hero-orb--soft {
-  animation: orb-drift-3 12s ease-in-out infinite;
-}
-
-/* Entrée séquentielle du contenu hero */
 .page-section--accueil .hero-badge,
 .page-section--accueil .accueil-nom,
 .page-section--accueil .accueil-sous-accroche,
@@ -94,139 +74,63 @@
               transform 600ms cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-.page-section--accueil.is-visible .hero-badge       { opacity: 1; transform: translateY(0); transition-delay: 100ms; }
-.page-section--accueil.is-visible .accueil-nom       { opacity: 1; transform: translateY(0); transition-delay: 250ms; }
+.page-section--accueil.is-visible .hero-badge           { opacity: 1; transform: translateY(0); transition-delay: 100ms; }
+.page-section--accueil.is-visible .accueil-nom           { opacity: 1; transform: translateY(0); transition-delay: 250ms; }
 .page-section--accueil.is-visible .accueil-sous-accroche { opacity: 1; transform: translateY(0); transition-delay: 400ms; }
-.page-section--accueil.is-visible .hero-cta-row      { opacity: 1; transform: translateY(0); transition-delay: 550ms; }
-.page-section--accueil.is-visible .hero-proof         { opacity: 1; transform: translateY(0); transition-delay: 700ms; }
+.page-section--accueil.is-visible .hero-cta-row          { opacity: 1; transform: translateY(0); transition-delay: 550ms; }
+.page-section--accueil.is-visible .hero-proof             { opacity: 1; transform: translateY(0); transition-delay: 700ms; }
 
-/* Portrait BG fade-in */
+/* Portrait BG */
 .hero-portrait-bg {
   opacity: 0;
   transition: opacity 1200ms ease 300ms;
 }
-.page-section--accueil.is-visible .hero-portrait-bg {
-  opacity: 1;
-}
+
+.page-section--accueil.is-visible .hero-portrait-bg { opacity: 1; }
 
 /* Scroll hint */
 .hero-scroll-hint {
   opacity: 0;
   transition: opacity 800ms ease 1000ms;
 }
-.page-section--accueil.is-visible .hero-scroll-hint {
-  opacity: 1;
-}
+
+.hero-scroll-hint svg { animation: scroll-bounce 2s ease-in-out infinite; }
+.page-section--accueil.is-visible .hero-scroll-hint { opacity: 1; }
 
 
-/* ============================================================
-   3. PAGE 4 — FLOTTEMENT DES LOGOS À PROPOS
-   ============================================================
-   Mouvement lent, désynchronisé, faible amplitude.
-   Ne démarre que quand la section est visible.              */
-
-/* À propos — photo entrance */
+/* 3. À PROPOS — Photo & logos flottants
+   ============================================================ */
 .a-propos-photo .photo--portrait {
   transition:
     opacity 500ms cubic-bezier(0.25, 0.1, 0.25, 1) 100ms,
     transform 500ms cubic-bezier(0.25, 0.1, 0.25, 1) 100ms;
 }
+
 .page-section:not(.is-visible) .a-propos-photo .photo--portrait {
   opacity: 0;
   transform: scale(0.97);
 }
+
 .page-section.is-visible .a-propos-photo .photo--portrait {
   opacity: 1;
   transform: scale(1);
 }
 
-.page-section.is-visible .a-propos-logo--right {
-  animation: float-slow-alt 6s ease-in-out infinite;
-}
-
-.page-section.is-visible .a-propos-logo--left {
-  animation: float-slow 6s ease-in-out infinite;
-}
-
-/* will-change actif uniquement pendant la visibilité */
-.page-section.is-visible .a-propos-logo {
-  will-change: transform;
-}
+.page-section.is-visible .a-propos-logo--right { animation: float-slow-alt 6s ease-in-out infinite; }
+.page-section.is-visible .a-propos-logo--left  { animation: float-slow 6s ease-in-out infinite; }
+.page-section.is-visible .a-propos-logo { will-change: transform; }
 
 
-/* ============================================================
-   4. CARTES PROJETS — HOVER LIFT & IMAGE ZOOM
+/* 4. CARTES — Hover & staggered reveal
    ============================================================ */
-
-/* Les styles de hover (transform, box-shadow, zoom image) sont
-   définis dans layout.css pour éviter les conflits de spécificité. */
-
-
-/* ============================================================
-   5. TAGS — FEEDBACK HOVER DISCRET
-   ============================================================ */
-
 .tag {
-  transition:
-    background-color 150ms ease,
-    color 150ms ease;
+  transition: background-color 150ms ease, color 150ms ease;
 }
 
 .tag:hover {
   background-color: var(--color-accent-ia);
   color: var(--color-text-inverse);
 }
-
-
-/* ============================================================
-   6. LIENS & CTA — FEEDBACK
-   ============================================================ */
-
-/* CTA email : soulignement animé via pseudo-élément */
-.contact-cta--primary {
-  position: relative;
-  overflow: hidden;
-  transition:
-    box-shadow 200ms ease,
-    transform 200ms ease;
-}
-
-.contact-cta--primary:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 8px 24px rgba(37, 99, 235, 0.15),
-    0 2px 6px rgba(15, 23, 42, 0.06);
-}
-
-/* LinkedIn : opacity shift */
-.contact-link--secondary {
-  transition:
-    color 200ms ease,
-    opacity 200ms ease;
-  opacity: 0.7;
-}
-
-.contact-link--secondary:hover {
-  opacity: 1;
-}
-
-
-/* ============================================================
-   7. ONGLETS À PROPOS — TRANSITION DOUCE
-   ============================================================ */
-
-.a-propos-tab {
-  transition:
-    color 200ms ease,
-    border-color 200ms ease;
-}
-
-
-/* ============================================================
-   8. STAGGERED REVEAL — CARTES PROJETS
-   ============================================================
-   Les cartes apparaissent en cascade quand la section entre.
-   Chaque carte a un délai incrémental.                       */
 
 .projet-card {
   opacity: 0;
@@ -242,74 +146,23 @@
   transform: translateY(0);
 }
 
-/* Délais en cascade (nth-child) */
 .page-section.is-visible .projet-card:nth-child(1) { transition-delay: 80ms; }
 .page-section.is-visible .projet-card:nth-child(2) { transition-delay: 180ms; }
 .page-section.is-visible .projet-card:nth-child(3) { transition-delay: 280ms; }
 
 
-/* ============================================================
-   9. CHIFFRES-CLÉS — BARRES ANIMÉES (grow on scroll)
+/* 5. ONGLETS À PROPOS
    ============================================================ */
-
-/* Les barres commencent à 0 et grandissent via transition
-   défine dans layout.css (height + transition-delay par nth-child).
-   Pas de keyframes nécessaires — tout est piloté par .is-visible.
-*/
-
-
-/* ============================================================
-   10. ACCESSIBILITÉ — REDUCED MOTION
-   ============================================================
-   Désactive TOUTES les animations si l'utilisateur le demande. */
-
-@media (prefers-reduced-motion: reduce) {
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    transition-delay: 0ms !important;
-  }
-
-  /* Tout visible immédiatement */
-  .page-section > *:first-child,
-  .projet-card,
-  .chiffre-cle,
-  .page-section--accueil .hero-badge,
-  .page-section--accueil .accueil-nom,
-  .page-section--accueil .accueil-sous-accroche,
-  .page-section--accueil .hero-cta-row,
-  .page-section--accueil .hero-proof,
-  .hero-portrait-bg,
-  .hero-scroll-hint {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  .page-section:not(.is-visible) .a-propos-photo .photo--portrait {
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
-  }
+.a-propos-tab {
+  transition: color 200ms ease, border-color 200ms ease;
 }
 
 
-/* ============================================================
-   11. CONTACT — ORBE DRIFT & ENTRANCE
+/* 6. CONTACT — Orbes & entrée
    ============================================================ */
+.page-section.is-visible .contact-orb--blue { animation: orb-drift-2 18s ease-in-out infinite; }
+.page-section.is-visible .contact-orb--gold { animation: orb-drift-1 15s ease-in-out infinite; }
 
-.page-section.is-visible .contact-orb--blue {
-  animation: orb-drift-2 18s ease-in-out infinite;
-}
-
-.page-section.is-visible .contact-orb--gold {
-  animation: orb-drift-1 15s ease-in-out infinite;
-}
-
-/* Contact content entrance */
 .page-section--contact .contact-content > * {
   opacity: 0;
   transform: translateY(16px);
@@ -320,3 +173,36 @@
 .page-section--contact.is-visible .contact-content > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 250ms; }
 .page-section--contact.is-visible .contact-content > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 400ms; }
 .page-section--contact.is-visible .contact-content > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 550ms; }
+
+
+/* 7. ACCESSIBILITÉ — Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  .page-section > *:first-child,
+  .projet-card,
+  .page-section--accueil .hero-badge,
+  .page-section--accueil .accueil-nom,
+  .page-section--accueil .accueil-sous-accroche,
+  .page-section--accueil .hero-cta-row,
+  .page-section--accueil .hero-proof,
+  .hero-portrait-bg,
+  .hero-scroll-hint,
+  .page-section--contact .contact-content > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .page-section:not(.is-visible) .a-propos-photo .photo--portrait {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

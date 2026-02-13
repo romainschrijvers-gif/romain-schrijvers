@@ -10,33 +10,32 @@
 </head>
 <body>
 
-<!-- SVG clipPath invisible — hexagone aux bords très légèrement arrondis -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <clipPath id="hex-clip" clipPathUnits="objectBoundingBox">
-      <path d="M0.473,0.013 Q0.5,0,0.527,0.013 L0.973,0.237 Q1,0.25,1,0.28 L1,0.72 Q1,0.75,0.973,0.763 L0.527,0.987 Q0.5,1,0.473,0.987 L0.027,0.763 Q0,0.75,0,0.72 L0,0.28 Q0,0.25,0.027,0.237 Z" />
-    </clipPath>
-  </defs>
-</svg>
+  <!-- SVG clipPath invisible — hexagone -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <clipPath id="hex-clip" clipPathUnits="objectBoundingBox">
+        <path d="M0.473,0.013 Q0.5,0,0.527,0.013 L0.973,0.237 Q1,0.25,1,0.28
+                 L1,0.72 Q1,0.75,0.973,0.763 L0.527,0.987 Q0.5,1,0.473,0.987
+                 L0.027,0.763 Q0,0.75,0,0.72 L0,0.28 Q0,0.25,0.027,0.237 Z"/>
+      </clipPath>
+    </defs>
+  </svg>
 
   <main class="page-wrapper">
 
-    <!-- ============================================================
+    <!-- ============================
          PAGE 1 — ACCUEIL
-         ============================================================ -->
+         ============================ -->
     <section class="page-section page-section--accueil">
 
-      <!-- Orbes décoratives animées -->
       <div class="hero-orb hero-orb--blue" aria-hidden="true"></div>
       <div class="hero-orb hero-orb--gold" aria-hidden="true"></div>
       <div class="hero-orb hero-orb--soft" aria-hidden="true"></div>
 
-      <!-- Portrait en arrière-plan intégré -->
       <div class="hero-portrait-bg" aria-hidden="true">
         <img src="assets/images/portrait/portrait.png" alt="" class="hero-portrait-img">
       </div>
 
-      <!-- Grain overlay -->
       <div class="hero-grain" aria-hidden="true"></div>
 
       <div class="accueil-content">
@@ -53,10 +52,10 @@
           Développement full-stack, IA, CRM, automatisation et intégration au service des enjeux métiers.
         </p>
 
-
         <div class="hero-cta-row">
           <a href="mailto:romain.schrijvers@gmail.com" class="hero-cta">Me contacter</a>
-          <a href="https://www.linkedin.com/in/romain-schrijvers-95aa00262/" class="hero-cta-secondary" target="_blank" rel="noopener noreferrer">LinkedIn →</a>
+          <a href="https://www.linkedin.com/in/romain-schrijvers-95aa00262/"
+             class="hero-cta-secondary" target="_blank" rel="noopener noreferrer">LinkedIn →</a>
         </div>
 
         <div class="hero-proof">
@@ -71,16 +70,18 @@
 
       <div class="hero-scroll-hint" aria-hidden="true">
         <span>Scroll</span>
-        <svg width="16" height="24" viewBox="0 0 16 24" fill="none"><path d="M8 4v12m0 0l-4-4m4 4l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
+          <path d="M8 4v12m0 0l-4-4m4 4l4-4" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </div>
 
     </section>
 
-    <!-- ============================================================
-         PAGE 2 — PROJETS SUIVIS (JUNIOR-ENTREPRISE)
-         ============================================================ -->
+    <!-- ============================
+         PAGE 2 — PROJETS SUIVIS
+         ============================ -->
     <section class="page-section page-section--projets-suivis">
-
       <div class="projets-suivis-content">
 
         <header class="section-header">
@@ -94,7 +95,7 @@
 
         <div class="chiffres-cles">
 
-          <!-- Graph 1 : Barre verticale — montant financier -->
+          <!-- Barre verticale — montant financier -->
           <div class="chiffre-cle-graph chiffre-cle-graph--bar">
             <div class="chiffre-cle-bar-wrap">
               <div class="chiffre-cle-bar" data-height="85"></div>
@@ -105,7 +106,7 @@
             </div>
           </div>
 
-          <!-- Graph 2 : Blocs empilés — volume de projets -->
+          <!-- Blocs empilés — volume de projets -->
           <div class="chiffre-cle-graph chiffre-cle-graph--blocks">
             <div class="chiffre-cle-blocks-wrap">
               <div class="chiffre-cle-block" data-delay="1"></div>
@@ -120,13 +121,16 @@
             </div>
           </div>
 
-          <!-- Graph 3 : Anneau segmenté — diversification -->
+          <!-- Anneau segmenté — diversification -->
           <div class="chiffre-cle-graph chiffre-cle-graph--ring">
             <div class="chiffre-cle-ring-wrap">
               <svg class="chiffre-cle-ring" viewBox="0 0 80 80">
-                <circle class="ring-segment ring-segment--1" cx="40" cy="40" r="30" stroke-dashoffset="0" />
-                <circle class="ring-segment ring-segment--2" cx="40" cy="40" r="30" stroke-dashoffset="-63" />
-                <circle class="ring-segment ring-segment--3" cx="40" cy="40" r="30" stroke-dashoffset="-126" />
+                <circle class="ring-segment ring-segment--1" cx="40" cy="40" r="30"
+                        stroke-dashoffset="0"/>
+                <circle class="ring-segment ring-segment--2" cx="40" cy="40" r="30"
+                        stroke-dashoffset="-63"/>
+                <circle class="ring-segment ring-segment--3" cx="40" cy="40" r="30"
+                        stroke-dashoffset="-126"/>
               </svg>
             </div>
             <div class="chiffre-cle-label">
@@ -139,7 +143,6 @@
 
         <div class="projets-grid projets-grid--trois">
 
-          <!-- Projet 1 — CEA -->
           <article class="projet-card">
             <div class="projet-card-visuels">
               <img src="assets/images/logos/logo-cea.png" alt="Logo CEA" class="projet-card-image">
@@ -159,7 +162,6 @@
             </div>
           </article>
 
-          <!-- Projet 2 — ATEXO -->
           <article class="projet-card">
             <div class="projet-card-visuels">
               <img src="assets/images/logos/logo-atexo.png" alt="Logo ATEXO" class="projet-card-image">
@@ -179,7 +181,6 @@
             </div>
           </article>
 
-          <!-- Projet 3 — PROVEXI -->
           <article class="projet-card">
             <div class="projet-card-visuels">
               <img src="assets/images/logos/logo-provexi.png" alt="Logo PROVEXI" class="projet-card-image">
@@ -200,16 +201,13 @@
           </article>
 
         </div>
-
       </div>
-
     </section>
 
-    <!-- ============================================================
+    <!-- ============================
          PAGE 3 — PROJETS PERSONNELS
-         ============================================================ -->
+         ============================ -->
     <section class="page-section page-section--projets-personnels">
-
       <div class="projets-personnels-content">
 
         <header class="section-header">
@@ -223,7 +221,6 @@
 
         <div class="projets-grid projets-grid--trois">
 
-          <!-- Projet 1 — LinkedIn / PB -->
           <article class="projet-card">
             <div class="projet-card-visuels">
               <img src="assets/images/logos/logo-pb.jpeg" alt="Logo PB" class="projet-card-image">
@@ -244,7 +241,6 @@
             </div>
           </article>
 
-          <!-- Projet 2 — Propale Bot / ETIC -->
           <article class="projet-card">
             <div class="projet-card-visuels">
               <img src="assets/images/logos/logo-etic.png" alt="Logo ETIC" class="projet-card-image">
@@ -265,10 +261,10 @@
             </div>
           </article>
 
-          <!-- Projet 3 — ESSI / Feux de forêt -->
           <article class="projet-card">
             <div class="projet-card-visuels">
-              <img src="assets/images/projets/feu_capteurs.jpeg" alt="Capteur IoT feux de forêt" class="projet-card-image">
+              <img src="assets/images/projets/feu_capteurs.jpeg" alt="Capteur IoT feux de forêt"
+                   class="projet-card-image">
             </div>
             <div class="projet-card-body">
               <h3 class="projet-card-titre">Système IoT de prévention des feux de forêt — ESSI</h3>
@@ -287,28 +283,28 @@
           </article>
 
         </div>
-
       </div>
-
     </section>
 
-    <!-- ============================================================
+    <!-- ============================
          PAGE 4 — À PROPOS
-         ============================================================ -->
+         ============================ -->
     <section class="page-section page-section--a-propos">
-
       <div class="a-propos-content">
 
         <div class="a-propos-header">
           <div class="a-propos-visuels">
             <div class="a-propos-logo a-propos-logo--left">
-              <img src="assets/images/logos/logo-insa.png" alt="Logo INSA Lyon" class="logo logo--insa">
+              <img src="assets/images/logos/logo-insa.png" alt="Logo INSA Lyon"
+                   class="logo logo--insa">
             </div>
             <div class="a-propos-photo">
-              <img src="assets/images/portrait/portrait.png" alt="Photo de Romain SCHRIJVERS" class="photo photo--portrait">
+              <img src="assets/images/portrait/portrait.png"
+                   alt="Photo de Romain SCHRIJVERS" class="photo photo--portrait">
             </div>
             <div class="a-propos-logo a-propos-logo--right">
-              <img src="assets/images/logos/logo-etic.png" alt="Logo ETIC INSA Technologies" class="logo logo--etic">
+              <img src="assets/images/logos/logo-etic.png" alt="Logo ETIC INSA Technologies"
+                   class="logo logo--etic">
             </div>
           </div>
         </div>
@@ -316,24 +312,24 @@
         <div class="a-propos-bandeau">
 
           <nav class="a-propos-tabs" aria-label="Sections À propos">
-            <button class="a-propos-tab a-propos-tab--active" aria-selected="true" aria-controls="tab-panel-insa">
+            <button class="a-propos-tab a-propos-tab--active"
+                    aria-selected="true" aria-controls="tab-panel-insa">
               INSA Lyon
             </button>
             <span class="a-propos-separator" aria-hidden="true"></span>
-            <button class="a-propos-tab" aria-selected="false" aria-controls="tab-panel-etic">
+            <button class="a-propos-tab"
+                    aria-selected="false" aria-controls="tab-panel-etic">
               ETIC INSA Technologies
             </button>
             <span class="a-propos-separator" aria-hidden="true"></span>
-            <button class="a-propos-tab" aria-selected="false" aria-controls="tab-panel-sport">
+            <button class="a-propos-tab"
+                    aria-selected="false" aria-controls="tab-panel-sport">
               Sport haut niveau
             </button>
           </nav>
 
-          <!-- Panel INSA Lyon (actif par défaut) -->
           <div class="a-propos-panel a-propos-panel--active" id="tab-panel-insa" role="tabpanel">
-            <div class="a-propos-panel-col a-propos-panel-col--text">
-              <p></p>
-            </div>
+            <div class="a-propos-panel-col a-propos-panel-col--text"><p></p></div>
             <div class="a-propos-panel-col a-propos-panel-col--highlights">
               <h4 class="a-propos-highlights-title"></h4>
               <ul class="a-propos-highlights-list"></ul>
@@ -343,11 +339,8 @@
             </div>
           </div>
 
-          <!-- Panel ETIC INSA Technologies -->
           <div class="a-propos-panel" id="tab-panel-etic" role="tabpanel" hidden>
-            <div class="a-propos-panel-col a-propos-panel-col--text">
-              <p></p>
-            </div>
+            <div class="a-propos-panel-col a-propos-panel-col--text"><p></p></div>
             <div class="a-propos-panel-col a-propos-panel-col--highlights">
               <h4 class="a-propos-highlights-title"></h4>
               <ul class="a-propos-highlights-list"></ul>
@@ -357,11 +350,8 @@
             </div>
           </div>
 
-          <!-- Panel Sport haut niveau -->
           <div class="a-propos-panel" id="tab-panel-sport" role="tabpanel" hidden>
-            <div class="a-propos-panel-col a-propos-panel-col--text">
-              <p></p>
-            </div>
+            <div class="a-propos-panel-col a-propos-panel-col--text"><p></p></div>
             <div class="a-propos-panel-col a-propos-panel-col--highlights">
               <h4 class="a-propos-highlights-title"></h4>
               <ul class="a-propos-highlights-list"></ul>
@@ -372,27 +362,27 @@
           </div>
 
         </div>
-
       </div>
-
     </section>
 
-    <!-- ============================================================
+    <!-- ============================
          PAGE 5 — CONTACT
-         ============================================================ -->
+         ============================ -->
     <section class="page-section page-section--contact">
 
-      <!-- Orbes décoratives (même style que hero) -->
       <div class="contact-orb contact-orb--blue" aria-hidden="true"></div>
       <div class="contact-orb contact-orb--gold" aria-hidden="true"></div>
 
       <div class="contact-content">
         <span class="hero-badge">Parlons-en</span>
-        <p class="contact-message">Un projet, une opportunité<br>ou simplement envie d'échanger ?</p>
+        <p class="contact-message">
+          Un projet, une opportunité<br>ou simplement envie d'échanger ?
+        </p>
         <a href="mailto:romain.schrijvers@gmail.com" class="hero-cta">
           romain.schrijvers@gmail.com
         </a>
-        <a href="https://www.linkedin.com/in/romain-schrijvers-95aa00262/" class="hero-cta-secondary" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.linkedin.com/in/romain-schrijvers-95aa00262/"
+           class="hero-cta-secondary" target="_blank" rel="noopener noreferrer">
           LinkedIn →
         </a>
       </div>
