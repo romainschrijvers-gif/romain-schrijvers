@@ -14,12 +14,13 @@ Portfolio personnel présentant mon parcours, mes projets et compétences en ing
 2. [Technologies utilisées](#technologies-utilisées)
 3. [Structure des fichiers](#structure-des-fichiers)
 4. [Les 5 sections de la page d'accueil](#les-5-sections-de-la-page-daccueil)
-5. [Modifier le contenu](#modifier-le-contenu)
-6. [Modifier les animations](#modifier-les-animations)
-7. [Modifier le design system](#modifier-le-design-system)
-8. [Pages projet détail](#pages-projet-détail)
-9. [Ajouter un nouveau projet](#ajouter-un-nouveau-projet)
-10. [Responsive & accessibilité](#responsive--accessibilité)
+5. [Système de carousel](#système-de-carousel)
+6. [Overlay projet détail](#overlay-projet-détail)
+7. [Modifier le contenu](#modifier-le-contenu)
+8. [Modifier les animations](#modifier-les-animations)
+9. [Modifier le design system](#modifier-le-design-system)
+10. [Ajouter un nouveau projet](#ajouter-un-nouveau-projet)
+11. [Responsive & accessibilité](#responsive--accessibilité)
 
 ---
 
@@ -28,31 +29,23 @@ Portfolio personnel présentant mon parcours, mes projets et compétences en ing
 ```
 📁 site perso v2/
 │
-├── index.html                 ← Page principale (one-page, 5 sections)
-│
-├── 📁 projets/                ← Pages détail individuelles par projet
-│   ├── atexo.html
-│   ├── cea.html
-│   ├── linkedin.html
-│   ├── propale-bot.html
-│   └── provexi.html
+├── index.html                 ← Page unique (one-page, 5 sections + overlay détail)
 │
 ├── 📁 css/
 │   ├── design-system.css      ← Tokens (couleurs, typo, spacing), reset, composants atomiques
-│   ├── layout.css             ← Mise en page de chaque section + responsive
-│   ├── animations.css         ← Keyframes, scroll reveal, transitions, hover
-│   └── projet-detail.css      ← Layout & styles des pages projet individuelles
+│   ├── layout.css             ← Mise en page de chaque section, carousel, responsive (5 breakpoints)
+│   ├── animations.css         ← Keyframes, scroll reveal, transitions, hover, reduced-motion
+│   └── projet-detail.css      ← Overlay pleine page avec circular reveal, layout deux colonnes, variante light/dark
 │
 ├── 📁 js/
-│   ├── app.js                 ← Logique page principale (snap, nav, tabs, contenu À propos)
-│   └── projet-detail.js       ← Logique pages projet (scroll reveal, nav shadow, escape)
+│   └── app.js                 ← Toute la logique : snap, nav, hamburger, carousel infini, overlay projet, tabs, contenu À propos
 │
 └── 📁 assets/
     └── 📁 images/
-        ├── About_me/          ← Photos pour la section À propos (insa_about, etic_about, sport_about)
-        ├── logos/             ← Logos clients/partenaires (CEA, ATEXO, PROVEXI, ETIC, INSA, PB)
+        ├── About_me/          ← Photos onglets À propos (insa_about.jpg, etic_about.JPG, sport_about.JPG)
+        ├── logos/             ← Logos clients/partenaires (CEA, ATEXO, PROVEXI, SOCOTEC, ETIC, INSA, PB)
         ├── portrait/          ← Photo portrait (hero + à propos)
-        └── projets/           ← Visuels SVG/images pour les pages détail et cartes projet
+        └── projets/           ← Visuels projets (cea.jpeg, atexo-projet.jpeg, socotec-projet.jpeg, projet-pb.png, projet-provexi.png, propale-bot.png, iot.png)
 ```
 
 Le site est **100 % statique** — pas de framework, pas de build, pas de bundler. Il suffit d'ouvrir `index.html` dans un navigateur ou de déployer sur n'importe quel hébergement statique (GitHub Pages, Netlify, Vercel…).
@@ -63,9 +56,9 @@ Le site est **100 % statique** — pas de framework, pas de build, pas de bundle
 
 | Technologie | Usage |
 |---|---|
-| **HTML5** | Structure sémantique, sections, articles, SVG inline |
-| **CSS3** | Design system (custom properties), animations keyframes, transitions, grid/flexbox, responsive |
-| **JavaScript vanilla** (ES5) | Navigation snap, IntersectionObserver, tabs, injection de contenu dynamique |
+| **HTML5** | Structure sémantique, sections, SVG inline (clip-path hexagonal, étoile, gradients) |
+| **CSS3** | Design system (custom properties), animations keyframes, transitions, grid/flexbox, clip-path circular reveal, backdrop-filter, responsive 5 breakpoints |
+| **JavaScript vanilla** (ES5) | Snap navigation, carousel infini (drag + touch + velocity), overlay projet avec animation circulaire, IntersectionObserver, tabs, injection dynamique de contenu |
 | **Google Fonts** | Space Grotesk (headings) + Inter (body) |
 | **Git / GitHub** | Versioning + déploiement GitHub Pages |
 
@@ -79,17 +72,26 @@ Le site est **100 % statique** — pas de framework, pas de build, pas de bundle
 
 | Fichier | Rôle |
 |---|---|
-| `design-system.css` | Tokens de design (couleurs, typo, spacing, radius, shadows), reset CSS, composants atomiques (tags, liens, séparateurs, utilitaires) |
-| `layout.css` | Positionnement de chaque section (hero, projets, à propos, contact), snap vertical, grilles de cartes, responsive (breakpoints `768px` et `480px`) |
-| `animations.css` | Keyframes (`float-slow`, `orb-drift`), scroll reveal, entrées séquentielles hero, hover cartes/tags, accessibilité `prefers-reduced-motion` |
-| `projet-detail.css` | Layout des pages projet individuelles (hero projet, sections, sidebar, cover, nav retour) |
+| `design-system.css` | Tokens de design (couleurs, typo, spacing, radius, shadows), reset CSS, composants atomiques (tags, liens, séparateurs, chiffres-clés, utilitaires) |
+| `layout.css` | Positionnement de chaque section (hero, projets, à propos, contact), snap vertical, carousel infini, nav header + hamburger, dots indicator, responsive (breakpoints `1200px`, `1024px`, `768px`, `480px`, `max-height:700px`) |
+| `animations.css` | Keyframes (`float-slow`, `orb-drift`, `scroll-bounce`), scroll reveal, entrées séquentielles hero + contact, hover cartes/tags, carousel reveal, portrait scale, accessibilité `prefers-reduced-motion` |
+| `projet-detail.css` | Overlay pleine page : backdrop blur, circular reveal (`clip-path: circle()`), layout deux colonnes (image + KPIs / contenu texte), variante light (projets suivis) et dark (projets persos), staggered content reveal, CTA hover sur cartes actives, responsive overlay |
 
-### JS — Séparation des responsabilités
+### JS — Fichier unique `app.js`
 
-| Fichier | Rôle |
+Toute la logique est dans un seul fichier `app.js` (IIFE), organisé en sections :
+
+| Section | Rôle |
 |---|---|
-| `app.js` | **Page principale uniquement** : snap scroll (wheel + keyboard + touch), navigation header (+ hamburger mobile), indicateur dots, tabs À propos, injection du contenu À propos, IntersectionObserver pour le reveal et le thème nav dark/light |
-| `projet-detail.js` | **Pages projet uniquement** : scroll reveal via IntersectionObserver, shadow de la nav au scroll, raccourci clavier Escape pour retour |
+| **Snap Navigation** | Scroll snap (wheel + keyboard + touch swipe), cooldown, accumulation wheel avec threshold |
+| **Navigation Header** | Injection dynamique de la nav, hamburger mobile avec ouverture/fermeture, liens actifs |
+| **Dots Indicator** | Indicateur latéral de position (masqué sur mobile) |
+| **Decorative Shape** | Hexagone décoratif injecté derrière la photo À propos |
+| **Tabs À propos** | Gestion onglets INSA / ETIC / Sport avec `aria-selected` et `aria-controls` |
+| **Contenu À propos** | Injection du texte, highlights et images pour chaque onglet |
+| **Carousel** | Factory générique pour carousel infini : triplication des cartes, drag (mouse + touch), velocity-based snapping, dots, keyboard arrows, responsive card sizing |
+| **Scroll Observer** | IntersectionObserver pour `.is-visible`, mise à jour nav links + dots + currentIndex |
+| **Project Detail Overlay** | Ouverture (circular reveal depuis la carte cliquée), rendu HTML du détail (header, image, KPIs, contexte, méthode, stack), fermeture (animation inverse), raccourci Escape |
 
 ---
 
@@ -97,13 +99,132 @@ Le site est **100 % statique** — pas de framework, pas de build, pas de bundle
 
 | # | Section | Classe CSS | Description |
 |---|---|---|---|
-| 1 | **Accueil (Hero)** | `.page-section--accueil` | Portrait, accroche, badge "Open to Opportunities", CTA contact + LinkedIn, logos INSA/ETIC |
-| 2 | **Projets suivis** | `.page-section--projets-suivis` | Chiffres clés animés (barre, blocs, anneau SVG) + 3 cartes projets (CEA, ATEXO, PROVEXI) |
-| 3 | **Projets personnels** | `.page-section--projets-personnels` | 3 cartes projets (LinkedIn, Propale Bot, IoT feux de forêt) |
-| 4 | **À propos** | `.page-section--a-propos` | Photo + logos flottants, onglets (INSA / ETIC / Sport), contenu injecté par JS |
-| 5 | **Contact** | `.page-section--contact` | Orbes décoratives, message, lien mail + LinkedIn |
+| 1 | **Accueil (Hero)** | `.page-section--accueil` | Fond dark, orbes animées, portrait en filigrane, badge "Open to Opportunities", accroche, CTA contact + LinkedIn, logos proof INSA/ETIC, indicateur scroll |
+| 2 | **Projets suivis** | `.page-section--projets-suivis` | Fond clair, chiffres-clés animés (barre, blocs empilés, étoile SVG), **carousel infini** avec 3 projets (CEA, ATEXO, PROVEXI), dots de pagination |
+| 3 | **Projets personnels** | `.page-section--projets-personnels` | Fond dark, **carousel infini** avec 4 projets (SOCOTEC, Parkhouse Bell, Propale Bot, IoT), dots de pagination |
+| 4 | **À propos** | `.page-section--a-propos` | Photo portrait hexagonale + halos décoratifs + hexagone JS, logos flottants, 3 onglets (INSA / ETIC / Sport), contenu + image injectés par JS |
+| 5 | **Contact** | `.page-section--contact` | Fond dark, orbes, badge "Parlons-en", message, lien mail + LinkedIn |
 
 La navigation entre sections est **snap-scroll** (desktop) ou **scroll libre** (mobile ≤ 768px).
+
+---
+
+## Système de carousel
+
+Les projets (suivis et personnels) sont affichés dans des **carousels infinis** avec les fonctionnalités suivantes :
+
+### Fonctionnement
+
+- **Infinite scroll** : les cartes sont tripliquées dans le DOM pour permettre un défilement sans fin
+- **Drag (souris)** : cliquer-glisser avec détection de vélocité pour le snap
+- **Touch (mobile)** : swipe horizontal avec détection de direction (horizontal vs vertical) pour ne pas bloquer le scroll vertical
+- **Keyboard** : flèches gauche/droite quand la section est visible
+- **Dots** : cliquables pour naviguer directement à un projet
+- **Carte active** : la carte centrée est agrandie (`scale(1.05)`), les autres sont réduites et floutées
+
+### Tailles responsive des cartes
+
+| Breakpoint | Largeur carte | Hauteur carte |
+|---|---|---|
+| > 1024px | 480px | `min(520px, calc(100vh - 320px))` |
+| ≤ 1024px | 380px | `min(460px, calc(100vh - 280px))` |
+| ≤ 768px | 300px | `min(400px, calc(100vh - 240px))` |
+| ≤ 480px | 260px | `min(360px, calc(100vh - 200px))` |
+
+### Structure d'une carte carousel
+
+```
+┌──────────────────────────────────┐
+│ Visual (image hero + gradient)   │  66% hauteur
+│   ├─ Mission (uppercase label)   │
+│   ├─ Titre                       │
+│   └─ Sous-titre                  │
+├──────────────────────────────────┤
+│ Details (glass backdrop)         │  33% hauteur
+│   ├─ Label + Logo client         │
+│   ├─ Description (line-clamp)    │
+│   └─ Tags technos                │
+└──────────────────────────────────┘
+```
+
+Au hover sur la carte active, un overlay **"Voir le projet →"** apparaît ; au clic/tap, l'overlay détail s'ouvre.
+
+---
+
+## Overlay projet détail
+
+Au clic sur une carte active du carousel, un **overlay pleine page** s'ouvre avec une **animation circulaire** (`clip-path: circle()`) partant du centre de la carte cliquée.
+
+### Fonctionnalités
+
+- **Circular reveal** : l'overlay s'étend depuis le point de clic via `clip-path: circle(0% → 150%)`
+- **Variante light/dark** : les projets suivis utilisent un fond clair (`.project-detail-overlay--light`), les projets personnels un fond dark
+- **Background blur** : le contenu principal est flouté et assombri pendant l'overlay (`.page-wrapper.is-detail-open`)
+- **Staggered reveal** : le contenu du détail apparaît progressivement (header → image → KPIs → sections → stack)
+- **Fermeture** : bouton "Retour", touche Escape, animation inverse
+
+### Layout du détail
+
+```
+┌─ Retour ──────────────────────────────────────┐
+│                                                │
+│  MISSION · Titre · Sous-titre     Logo · Cat.  │
+│  ─────────────────────────────────────────────  │
+│                                                │
+│  ┌─────────────┐  ┌──────────────────────────┐ │
+│  │   Image     │  │  Contexte & objectif     │ │
+│  │  (cover)    │  │  ──────────────────────── │ │
+│  │             │  │  Méthode de travail       │ │
+│  ├─────────────┤  │  (bullet points)          │ │
+│  │ KPI │ KPI   │  │  ──────────────────────── │ │
+│  │ KPI │ KPI   │  │  Stack technique          │ │
+│  └─────────────┘  └──────────────────────────┘ │
+└────────────────────────────────────────────────┘
+```
+
+Sur mobile (≤ 768px), le layout passe en **une seule colonne** (image → KPIs → texte).
+
+### Données des projets
+
+Les projets sont définis dans `app.js` via deux tableaux : `PROJECTS_SUIVIS` (3 projets) et `PROJECTS_PERSO` (4 projets). Chaque objet contient :
+
+```javascript
+{
+  id: 'cea',                    // Identifiant unique
+  title: '...',                 // Titre carte + détail
+  subtitle: '...',              // Sous-titre
+  mission: '...',               // Label mission (uppercase)
+  description: '...',           // Description courte (carte)
+  image: 'assets/images/...',   // Image hero
+  logo: 'assets/images/...',    // Logo client
+  logoAlt: '...',               // Alt du logo
+  tags: ['...'],                // Tags technos (carte)
+  detail: {
+    category: '...',            // Catégorie (badge)
+    contexte: '...',            // Texte contexte
+    methode: '...',             // Texte méthode (auto-découpé en bullets)
+    kpis: [{ value, label }],   // 4 KPIs
+    technos: ['...']            // Stack technique (détail)
+  }
+}
+```
+
+### Liste des projets
+
+**Projets suivis (fond clair)** :
+| Projet | Client | Tags principaux |
+|---|---|---|
+| Extraction intelligente d'exigences | CEA | Python, LangFlow, HolIAGen/Open WebUI |
+| POC IA – Analyse d'appels d'offres | ATEXO | RAG, LLM, NLP, PostgreSQL |
+| Intelligent Document Processing | PROVEXI | OCR, FastAPI, OpenRouter, Streamlit |
+
+**Projets personnels (fond dark)** :
+| Projet | Contexte | Tags principaux |
+|---|---|---|
+| Outil de pilotage marché | SOCOTEC | Power BI, API Sitadel, Data modeling, ETL |
+| Scripts Python (LinkedIn → Excel/PPT) | Parkhouse Bell | Pandas, python-pptx, openpyxl, lxml |
+| Propale Bot | ETIC INSA Technologies | Google Apps Script, Docker, OVH, API HubSpot |
+| Système IoT et data visualisation | INSA Lyon | IoT, LoRaWAN, HTML/CSS, JavaScript |
 
 ---
 
@@ -113,23 +234,30 @@ La navigation entre sections est **snap-scroll** (desktop) ou **scroll libre** (
 
 | Élément | Où modifier |
 |---|---|
-| Titre hero / accroche | `index.html` → `.accueil-nom` et `.accueil-sous-accroche` (lignes ~49-60) |
-| Badge hero | `index.html` → `.hero-badge` (ligne ~48) |
-| Boutons CTA | `index.html` → `.hero-cta-row` (lignes ~62-66) |
-| Cartes projets suivis | `index.html` → section `.page-section--projets-suivis` → chaque `<article class="projet-card">` |
-| Cartes projets persos | `index.html` → section `.page-section--projets-personnels` → chaque `<article class="projet-card">` |
+| Titre hero / accroche | `index.html` → `.accueil-nom` et `.accueil-sous-accroche` |
+| Badge hero | `index.html` → `.hero-badge` |
+| Boutons CTA | `index.html` → `.hero-cta-row` |
+| Labels de navigation | `js/app.js` → variable `SECTION_LABELS` |
 | Contenu À propos (onglets) | `js/app.js` → fonction `fillAboutContent()` — modifier l'objet `content` (textes, highlights) et `tabImages` (chemins images) |
 | Texte contact | `index.html` → section `.page-section--contact` |
-| Labels de navigation | `js/app.js` → variable `SECTION_LABELS` (ligne ~15) |
+
+### Changer les projets
+
+| Élément | Où modifier |
+|---|---|
+| Projets suivis (carte + détail) | `js/app.js` → tableau `PROJECTS_SUIVIS` |
+| Projets personnels (carte + détail) | `js/app.js` → tableau `PROJECTS_PERSO` |
+
+Chaque projet est un objet JS contenant toutes les infos (titre, description, image, logo, tags, détail KPIs, contexte, méthode, stack). La carte carousel et l'overlay détail sont générés automatiquement depuis ces données.
 
 ### Changer les images
 
 | Image | Emplacement |
 |---|---|
 | Portrait hero + à propos | `assets/images/portrait/portrait.png` |
-| Logos clients (cartes) | `assets/images/logos/logo-*.png` |
+| Logos clients | `assets/images/logos/logo-*.png` (+ logo-pb.jpeg, logos-socotec.png) |
 | Photos onglets À propos | `assets/images/About_me/` (insa_about.jpg, etic_about.JPG, sport_about.JPG) |
-| Visuels projets détail | `assets/images/projets/projet-*.svg` |
+| Visuels projets | `assets/images/projets/` (cea.jpeg, atexo-projet.jpeg, socotec-projet.jpeg, projet-pb.png, projet-provexi.png, propale-bot.png, iot.png) |
 
 ### Changer les liens / contacts
 
@@ -146,7 +274,7 @@ Tout est dans `css/animations.css`, organisé en 7 sections :
 
 | Keyframe | Effet | Utilisé par |
 |---|---|---|
-| `float-slow` | Flottement vertical lent (haut) | Logos À propos |
+| `float-slow` | Flottement vertical lent (haut) | Logo À propos gauche |
 | `float-slow-alt` | Flottement vertical lent (bas) | Logo À propos droit |
 | `orb-drift-1/2/3` | Dérive + scale des orbes | Orbes hero + contact |
 | `scroll-bounce` | Rebond flèche scroll | Indicateur "Scroll" hero |
@@ -158,17 +286,17 @@ Les sections apparaissent avec `opacity: 0 → 1` + `translateY(12px → 0)` via
 ### 2. Entrées séquentielles du hero
 
 Les éléments du hero apparaissent en cascade avec des `transition-delay` croissants (100ms → 700ms) :
-badge → titre → sous-accroche → CTA → logos proof.
+badge → titre → sous-accroche → CTA → logos proof. Portrait en fondu (1200ms). Hint scroll retardé (1000ms).
 
 ### 3. Flottement logos À propos
 
-Les logos INSA/ETIC flottent en continu avec `float-slow` / `float-slow-alt`.
+Les logos INSA/ETIC flottent en continu avec `float-slow` / `float-slow-alt`. Portrait avec transition scale (0.97 → 1).
 
-### 4. Cartes — Hover & staggered reveal
+### 4. Carousel — Reveal & hover
 
-- Les cartes apparaissent en cascade (delay 80ms → 280ms)
-- Les tags changent de couleur au hover
-- Les cartes ont un effet de shadow au hover (défini dans `layout.css`)
+- Le carousel container et les dots apparaissent en fondu avec delay
+- Les tags changent de couleur au hover (fond accent, texte inverse)
+- Les cartes actives ont un glow radial animé
 
 ### 5. Onglets À propos
 
@@ -180,7 +308,7 @@ Même pattern séquentiel que le hero (delay 100ms → 550ms).
 
 ### 7. Accessibilité — `prefers-reduced-motion`
 
-Si l'utilisateur a activé la réduction de mouvement dans son OS, **toutes les animations et transitions sont désactivées**. Ce bloc doit rester en fin de fichier.
+Si l'utilisateur a activé la réduction de mouvement dans son OS, **toutes les animations et transitions sont désactivées**. Ce bloc couvre le scroll reveal, le hero, le carousel, le portrait, le contact et l'overlay projet. Il doit rester en fin de fichier.
 
 ### Modifier une animation
 
@@ -228,68 +356,46 @@ Modifier les polices : changer l'import Google Fonts en haut du fichier + les va
 
 ---
 
-## Pages projet détail
-
-Chaque page dans `projets/` suit le même template :
-
-```html
-<!DOCTYPE html>
-<html lang="fr" class="page-projet">   ← classe sur <html> pour désactiver le snap
-<head>
-  <!-- design-system.css + layout.css + projet-detail.css -->
-</head>
-<body>
-  <nav class="projet-nav">              ← Barre de nav fixe avec bouton retour
-    <a href="../index.html" class="projet-nav-back">Retour au portfolio</a>
-    <span class="projet-nav-title">Titre court</span>
-  </nav>
-  <main>
-    <section class="projet-hero projet-reveal">    ← Hero avec badge, titre, description, tags
-    <div class="projet-cover projet-reveal">       ← Image de couverture
-    <section class="projet-section projet-reveal"> ← Sections de contenu (Contexte, Approche, etc.)
-  </main>
-  <script src="../js/projet-detail.js"></script>
-</body>
-</html>
-```
-
-La classe `projet-reveal` active le scroll reveal automatiquement via `projet-detail.js`.
-
----
-
 ## Ajouter un nouveau projet
 
-### 1. Créer la carte sur la page d'accueil
+### 1. Ajouter l'objet projet dans `app.js`
 
-Dans `index.html`, ajouter un `<article class="projet-card">` dans la grille souhaitée (projets suivis ou personnels) :
+Dans le tableau `PROJECTS_SUIVIS` ou `PROJECTS_PERSO`, ajouter un nouvel objet :
 
-```html
-<article class="projet-card">
-  <div class="projet-card-visuels">
-    <img src="assets/images/logos/logo-monprojet.png" alt="Logo" class="projet-card-image">
-  </div>
-  <div class="projet-card-body">
-    <h3 class="projet-card-titre">Titre du projet</h3>
-    <p class="projet-card-description">Description courte.</p>
-    <ul class="projet-card-tags">
-      <li class="tag">Tech1</li>
-      <li class="tag">Tech2</li>
-    </ul>
-  </div>
-</article>
+```javascript
+{
+  id: 'mon-projet',
+  title: 'Titre du projet',
+  subtitle: 'Sous-titre',
+  mission: 'MISSION EN MAJUSCULES',
+  description: 'Description courte pour la carte carousel.',
+  image: 'assets/images/projets/mon-projet.png',
+  logo: 'assets/images/logos/logo-monprojet.png',
+  logoAlt: 'Nom du client',
+  tags: ['Tech1', 'Tech2', 'Tech3'],
+  detail: {
+    category: 'Projet suivi',       // ou 'Projet personnel', 'Mission en cours', etc.
+    contexte: 'Texte du contexte...',
+    methode: 'Phrase 1. Phrase 2. Phrase 3.',  // Auto-découpé en bullet points
+    kpis: [
+      { value: '80%', label: 'Gain de temps' },
+      { value: 'Validé', label: 'POC confirmé' },
+      { value: '↑', label: 'Performance' },
+      { value: 'Auto', label: 'Automatisation' }
+    ],
+    technos: ['Python', 'Docker', 'API REST']
+  }
+}
 ```
 
-### 2. Créer la page détail
+### 2. Ajouter les assets
 
-1. Dupliquer un fichier existant dans `projets/` (ex: `cea.html`)
-2. Modifier le contenu (titre, description, sections)
-3. Ajouter l'image de couverture dans `assets/images/projets/`
-4. Ajouter le logo dans `assets/images/logos/`
-5. Le fichier inclut automatiquement `projet-detail.js` pour les animations
+1. Image du projet dans `assets/images/projets/`
+2. Logo du client dans `assets/images/logos/`
 
-### 3. (Optionnel) Lier la carte à la page détail
+### 3. C'est tout
 
-Entourer la carte d'un lien ou ajouter un lien dans le body de la carte pointant vers `projets/monprojet.html`.
+La carte carousel et la page détail overlay sont **générées automatiquement** par le JS. Pas besoin de modifier le HTML ni de créer de fichier supplémentaire.
 
 ---
 
@@ -299,19 +405,25 @@ Entourer la carte d'un lien ou ajouter un lien dans le body de la carte pointant
 
 | Breakpoint | Comportement |
 |---|---|
-| **> 768px** (desktop) | Snap scroll vertical, nav horizontale, grilles 3 colonnes |
-| **≤ 768px** (mobile) | Scroll libre, hamburger menu, grilles 1 colonne, tailles réduites |
-| **≤ 480px** | Ajustements typographiques supplémentaires |
+| **> 1200px** (desktop) | Snap scroll vertical, nav horizontale, carousel cartes 480px, overlay deux colonnes |
+| **≤ 1200px** (tablette large) | Carousel cartes légèrement réduites, panel image réduit |
+| **≤ 1024px** (tablette) | Carousel cartes 380px, nav compacte, panels À propos wrappés, overlay deux colonnes resserrées |
+| **≤ 768px** (mobile) | Scroll libre, hamburger menu, carousel cartes 300px, onglets verticaux, overlay une colonne, dots masqués |
+| **≤ 480px** (petit mobile) | Carousel cartes 260px, typographie réduite, paddings compacts |
+| **`max-height: 700px` + desktop** | Ajustements hauteur pour écrans courts (cartes, panels, paddings) |
 
-Le responsive est entièrement géré en fin de `layout.css` et `projet-detail.css`.
+Le responsive est géré en fin de `layout.css` (page principale) et de `projet-detail.css` (overlay).
 
 ### Accessibilité
 
-- **`prefers-reduced-motion`** : toutes les animations sont désactivées (bloc en fin de `animations.css`)
-- **`aria-label`** sur la nav et les éléments interactifs
-- **`aria-hidden="true"`** sur les éléments purement décoratifs (orbes, dots, SVG)
+- **`prefers-reduced-motion`** : toutes les animations et transitions sont désactivées (blocs en fin de `animations.css` et `projet-detail.css`)
+- **`aria-label`** sur la nav principale et le hamburger
+- **`aria-hidden="true"`** sur les éléments décoratifs (orbes, dots, grain, SVG clip-path, formes)
 - **`role="tabpanel"`** + **`aria-selected`** + **`aria-controls`** sur les onglets À propos
-- **Structure sémantique** : `<main>`, `<section>`, `<article>`, `<nav>`, `<header>`
+- **`aria-label`** sur chaque dot de carousel
+- **Raccourci Escape** pour fermer l'overlay détail
+- **Structure sémantique** : `<main>`, `<section>`, `<header>`, `<nav>`, `<button>`
+- **Scroll snap respectueux** : désactivé sur mobile pour ne pas bloquer le scroll natif
 
 ---
 

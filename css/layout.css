@@ -259,22 +259,10 @@ html {
 
 
 /* ============================================================
-   2. PAGE 2 — PROJETS SUIVIS
+   2. PAGE 2 — PROJETS SUIVIS (light theme + carousel)
    ============================================================ */
-.page-section--projets-suivis {
-  padding-top: 56px;
-  padding-bottom: var(--space-4);
-}
 
-.projets-suivis-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-3);
-  width: 100%;
-}
-
-/* Header de section */
+/* Header de section (shared) */
 .section-header {
   text-align: center;
   max-width: 700px;
@@ -294,34 +282,18 @@ html {
   line-height: var(--leading-relaxed);
 }
 
-/* Mode sombre — projets personnels */
-.page-section--projets-personnels .section-contexte { color: rgba(255, 255, 255, 0.55); }
-.page-section--projets-personnels .projet-card-titre { color: var(--color-text-inverse); }
-.page-section--projets-personnels .projet-card-description { color: rgba(255, 255, 255, 0.55); }
-
-.page-section--projets-personnels .projet-card {
-  background: linear-gradient(160deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.85) 100%);
-  border-color: rgba(59, 130, 246, 0.15);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+/* Section projets suivis layout (KPI banner) */
+.page-section--projets-suivis {
+  padding-top: 56px;
+  padding-bottom: var(--space-4);
 }
 
-.page-section--projets-personnels .projet-card:hover {
-  border-color: rgba(59, 130, 246, 0.45);
-  box-shadow:
-    0 0 20px rgba(29, 78, 216, 0.3),
-    0 0 40px rgba(29, 78, 216, 0.12),
-    0 12px 32px rgba(0, 0, 0, 0.35);
-}
-
-.page-section--projets-personnels .projet-card-visuels {
-  background-color: rgba(15, 23, 42, 0.6);
-  border-bottom-color: rgba(59, 130, 246, 0.1);
-}
-
-.page-section--projets-personnels .tag {
-  background-color: rgba(29, 78, 216, 0.15);
-  color: #60a5fa;
-  border-color: rgba(59, 130, 246, 0.2);
+.projets-suivis-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
 }
 
 /* Chiffres-clés */
@@ -330,24 +302,24 @@ html {
   justify-content: space-around;
   align-items: flex-end;
   width: 100%;
-  padding: var(--space-5) var(--space-10);
+  padding: var(--space-2) var(--space-8) var(--space-2);
   background: var(--gradient-subtle);
   border-radius: var(--radius-lg);
-  height: 160px;
+  height: 110px;
+  overflow: hidden;
 }
 
 .chiffre-cle-graph {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--space-1);
   flex: 1;
 }
 
-/* Barre verticale */
 .chiffre-cle-bar-wrap {
-  width: 48px;
-  height: 80px;
+  width: 36px;
+  height: 40px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -377,14 +349,13 @@ html {
   transition-delay: 200ms;
 }
 
-/* Blocs empilés */
 .chiffre-cle-blocks-wrap {
-  width: 52px;
-  height: 80px;
+  width: 40px;
+  height: 40px;
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
-  gap: 3px;
+  gap: 2px;
   justify-content: flex-start;
 }
 
@@ -398,165 +369,446 @@ html {
               opacity 300ms ease;
 }
 
-.page-section.is-visible .chiffre-cle-block { height: 12px; opacity: 1; }
+.page-section.is-visible .chiffre-cle-block { height: 6px; opacity: 1; }
 .page-section.is-visible .chiffre-cle-block[data-delay="1"] { transition-delay: 300ms; opacity: 1; }
 .page-section.is-visible .chiffre-cle-block[data-delay="2"] { transition-delay: 450ms; opacity: 0.88; }
 .page-section.is-visible .chiffre-cle-block[data-delay="3"] { transition-delay: 600ms; opacity: 0.76; }
 .page-section.is-visible .chiffre-cle-block[data-delay="4"] { transition-delay: 750ms; opacity: 0.64; }
 .page-section.is-visible .chiffre-cle-block[data-delay="5"] { transition-delay: 900ms; opacity: 0.52; }
 
-/* Anneau segmenté */
-.chiffre-cle-ring-wrap {
-  width: 70px;
-  height: 70px;
+/* Star icon */
+.chiffre-cle-star-wrap {
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 }
 
-.chiffre-cle-ring {
+.chiffre-cle-star {
   width: 100%;
   height: 100%;
-  transform: rotate(-90deg);
 }
 
-.ring-segment {
-  fill: none;
-  stroke-width: 7;
-  stroke-linecap: round;
-  stroke-dasharray: 0 188.5;
-  transition: stroke-dasharray 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+.star-path {
+  opacity: 0;
+  transform-origin: 40px 40px;
+  transition: opacity 0.6s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.ring-segment--1 { stroke: #1d4ed8; }
-.ring-segment--2 { stroke: #3b82f6; }
-.ring-segment--3 { stroke: #d97706; }
+.page-section.is-visible .star-path {
+  opacity: 1;
+  transition-delay: 400ms;
+}
 
-.page-section.is-visible .ring-segment--1 { stroke-dasharray: 55 188.5; stroke-dashoffset: 0;    transition-delay: 300ms; }
-.page-section.is-visible .ring-segment--2 { stroke-dasharray: 55 188.5; stroke-dashoffset: -63;  transition-delay: 500ms; }
-.page-section.is-visible .ring-segment--3 { stroke-dasharray: 55 188.5; stroke-dashoffset: -126; transition-delay: 700ms; }
-
-/* Labels animés */
 .chiffre-cle-label {
   display: flex;
   align-items: baseline;
-  gap: var(--space-1);
+  gap: 2px;
   opacity: 0;
-  transform: translateY(6px);
+  transform: translateY(4px);
   transition: opacity 400ms ease, transform 400ms ease;
+  line-height: 1;
 }
 
 .page-section.is-visible .chiffre-cle-graph--bar    .chiffre-cle-label { opacity: 1; transform: translateY(0); transition-delay: 800ms; }
 .page-section.is-visible .chiffre-cle-graph--blocks .chiffre-cle-label { opacity: 1; transform: translateY(0); transition-delay: 1050ms; }
-.page-section.is-visible .chiffre-cle-graph--ring   .chiffre-cle-label { opacity: 1; transform: translateY(0); transition-delay: 1200ms; }
+.page-section.is-visible .chiffre-cle-graph--star   .chiffre-cle-label { opacity: 1; transform: translateY(0); transition-delay: 1200ms; }
 
-/* Grille de cartes — 3 colonnes */
-.projets-grid--trois {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-5);
-  width: 100%;
+/* Card height reduction for projets suivis (KPI banner takes space) */
+.page-section--projets-suivis .carousel-card {
+  height: min(440px, calc(100vh - 400px));
 }
 
-/* Carte projet */
-.projet-card {
-  position: relative;
-  background: linear-gradient(160deg, var(--color-bg-card) 0%, rgba(219, 234, 254, 0.08) 100%);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid rgba(29, 78, 216, 0.08);
-  transition: box-shadow 0.35s ease, transform 0.35s ease, border-color 0.35s ease;
-  cursor: pointer;
+/* Light theme carousel edge overrides */
+.carousel-edge--light.carousel-edge--left {
+  background: linear-gradient(to right, var(--color-bg-main), transparent);
 }
 
-.projet-card:hover {
-  transform: translateY(-6px);
-  box-shadow:
-    0 0 20px rgba(29, 78, 216, 0.25),
-    0 0 40px rgba(29, 78, 216, 0.1),
-    0 12px 32px rgba(15, 23, 42, 0.14);
-  border-color: rgba(29, 78, 216, 0.4);
+.carousel-edge--light.carousel-edge--right {
+  background: linear-gradient(to left, var(--color-bg-main), transparent);
 }
 
-.projet-card:hover .projet-card-image {
-  transform: scale(1.08);
-  filter: brightness(1.1);
+/* Light theme card style overrides (projets suivis — fond blanc) */
+.page-section--projets-suivis .carousel-card-details {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  height: 38%;
+  padding: 12px 28px 10px;
 }
 
-.projet-card:hover .projet-card-visuels {
-  background-color: rgba(219, 234, 254, 0.15);
+.page-section--projets-suivis .carousel-card-visual {
+  height: 62%;
 }
 
-/* Zone image */
-.projet-card-visuels {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 8;
-  overflow: hidden;
-  background-color: var(--color-bg-main);
-  border-bottom: 1px solid rgba(29, 78, 216, 0.06);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 400ms ease;
-}
-
-.projet-card-image {
-  max-width: 85%;
-  max-height: 85%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  transition: transform 400ms cubic-bezier(0.25, 0.1, 0.25, 1), filter 400ms ease;
-}
-
-/* Corps de carte */
-.projet-card-body {
-  padding: var(--space-3) var(--space-4);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  flex: 1;
-}
-
-.projet-card-titre { font-size: var(--text-lg); }
-
-.projet-card-description {
-  font-size: var(--text-sm);
+.page-section--projets-suivis .carousel-card-desc {
   color: var(--color-text-secondary);
-  line-height: var(--leading-relaxed);
-  flex: 1;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
 }
 
-.projet-card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  list-style: none;
+.page-section--projets-suivis .carousel-card-accent-line {
+  background: linear-gradient(to right, transparent, rgba(29, 78, 216, 0.3), transparent);
+}
+
+.page-section--projets-suivis .carousel-card-label {
+  color: var(--color-text-secondary);
+  font-size: 0.6rem;
+}
+
+.page-section--projets-suivis .carousel-card-details-header {
+  margin-bottom: 2px;
+}
+
+.page-section--projets-suivis .carousel-card-logo {
+  height: 26px;
+  padding: 3px 6px;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.page-section--projets-suivis .carousel-card-tags {
   margin-top: auto;
+  padding-top: 4px;
+}
+
+.page-section--projets-suivis .carousel-card-tags .tag {
+  background-color: var(--color-accent-ia-soft);
+  color: var(--color-accent-ia);
+  border-color: rgba(29, 78, 216, 0.1);
+}
+
+.page-section--projets-suivis .carousel-card.is-active {
+  box-shadow:
+    0 0 80px rgba(29, 78, 216, 0.15),
+    0 30px 80px rgba(0, 0, 0, 0.25);
+}
+
+/* Dots — grey on light page */
+.page-section--projets-suivis .carousel-dot {
+  background: rgba(0, 0, 0, 0.15);
+}
+.page-section--projets-suivis .carousel-dot.is-active {
+  background: rgba(29, 78, 216, 0.8);
+}
+.page-section--projets-suivis .carousel-dot:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+.page-section--projets-suivis .carousel-dot.is-active:hover {
+  background: rgba(29, 78, 216, 1);
+}
+
+/* Bottom area blend — subtle gradient behind carousel */
+.page-section--projets-suivis .carousel-container {
+  background: linear-gradient(to bottom, transparent 0%, rgba(226, 232, 240, 0.4) 100%);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
 
 
 /* ============================================================
-   3. PAGE 3 — PROJETS PERSONNELS
+   3. PAGE 3 — PROJETS PERSONNELS (dark theme + carousel)
    ============================================================ */
 .page-section--projets-personnels {
-  padding-top: 64px;
-  padding-bottom: var(--space-6);
-  background: radial-gradient(ellipse at 40% 60%, #0c1a3a 0%, #0a0f1e 50%, #0f172a 100%);
+  background: #0a0f1e;
   overflow: hidden;
+}
+
+.page-section--projets-personnels .section-contexte {
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .projets-personnels-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-6);
   width: 100%;
+}
+
+/* --- Carousel Container --- */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-edge {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 220px;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.carousel-edge--left {
+  left: 0;
+  background: linear-gradient(to right, #0a0f1e, transparent);
+}
+
+.carousel-edge--right {
+  right: 0;
+  background: linear-gradient(to left, #0a0f1e, transparent);
+}
+
+/* --- Carousel Track --- */
+.carousel-track {
+  display: flex;
+  gap: 32px;
+  padding: 30px 0;
+  cursor: grab;
+  user-select: none;
+  will-change: transform;
+  -webkit-user-drag: none;
+}
+
+.carousel-track.is-dragging {
+  cursor: grabbing;
+}
+
+/* Prevent native browser image drag from blocking carousel swipe */
+.carousel-card img {
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.carousel-card {
+  cursor: grab;
+}
+
+.carousel-card.is-dragging,
+.carousel-track.is-dragging .carousel-card {
+  cursor: grabbing;
+}
+
+/* --- Carousel Card --- */
+.carousel-card {
+  position: relative;
+  width: 480px;
+  height: min(520px, calc(100vh - 320px));
+  flex-shrink: 0;
+  border-radius: 24px;
+  overflow: hidden;
+  transform: scale(0.85);
+  opacity: 0.4;
+  filter: blur(2px);
+  transition:
+    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    opacity 0.4s ease,
+    filter 0.4s ease,
+    box-shadow 0.4s ease;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+}
+
+.carousel-card.is-active {
+  transform: scale(1.05);
+  opacity: 1;
+  filter: blur(0px);
+  box-shadow:
+    0 0 120px rgba(29, 78, 216, 0.25),
+    0 40px 100px rgba(0, 0, 0, 0.8);
+}
+
+.carousel-card.is-active:hover {
+  transform: scale(1.08);
+  box-shadow:
+    0 0 140px rgba(29, 78, 216, 0.35),
+    0 50px 120px rgba(0, 0, 0, 0.9);
+}
+
+/* Glass border */
+.carousel-card-border {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Ambient glow behind active card */
+.carousel-card-glow {
+  position: absolute;
+  inset: -20px;
+  z-index: -1;
+  border-radius: 24px;
+  opacity: 0;
+  filter: blur(48px);
+  background: radial-gradient(circle, rgba(29, 78, 216, 0.4) 0%, transparent 70%);
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.carousel-card.is-active .carousel-card-glow {
+  opacity: 1;
+}
+
+/* --- Card Visual (top 2/3) --- */
+.carousel-card-visual {
+  position: relative;
+  height: 66.67%;
+  overflow: hidden;
+}
+
+.carousel-card-hero {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease-out;
+}
+
+.carousel-card.is-active:hover .carousel-card-hero {
+  transform: scale(1.05);
+}
+
+.carousel-card-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent, transparent 40%, rgba(10, 15, 30, 0.9));
+  pointer-events: none;
+}
+
+.carousel-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32px;
+}
+
+.carousel-card-mission {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-accent-ia-mid);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.carousel-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: var(--weight-bold);
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.carousel-card-subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* --- Card Details (bottom 1/3) --- */
+.carousel-card-details {
+  position: relative;
+  height: 33.33%;
+  background: rgba(22, 29, 47, 0.8);
+  backdrop-filter: blur(12px);
+  padding: 20px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.carousel-card-accent-line {
+  position: absolute;
+  top: 0;
+  left: 32px;
+  right: 32px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(29, 78, 216, 0.5), transparent);
+}
+
+.carousel-card-details-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.carousel-card-label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.carousel-card-logo {
+  height: 32px;
+  width: auto;
+  max-width: 90px;
+  object-fit: contain;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 4px 8px;
+}
+
+.carousel-card.is-active:hover .carousel-card-logo {
+  opacity: 1;
+}
+
+.carousel-card-desc {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.55);
+  line-height: var(--leading-relaxed);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.carousel-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+}
+
+.carousel-card-tags .tag {
+  background-color: rgba(29, 78, 216, 0.15);
+  color: #60a5fa;
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+/* --- Pagination Dots --- */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: width 0.3s ease, background-color 0.3s ease;
+  padding: 0;
+}
+
+.carousel-dot.is-active {
+  width: 32px;
+  background: rgba(29, 78, 216, 0.8);
+}
+
+.carousel-dot:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.carousel-dot.is-active:hover {
+  background: rgba(29, 78, 216, 1);
 }
 
 
@@ -884,18 +1136,14 @@ html {
   align-items: center;
   gap: var(--space-6);
   padding: var(--space-3) 8vw;
-  background: #FFFFFF;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  background: rgba(15, 23, 42, 0.97);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   transform: translateY(-100%);
   opacity: 0;
   transition: transform 500ms cubic-bezier(0.25, 0.1, 0.25, 1),
-              opacity 500ms cubic-bezier(0.25, 0.1, 0.25, 1),
-              background 400ms ease,
-              backdrop-filter 400ms ease,
-              -webkit-backdrop-filter 400ms ease,
-              border-bottom-color 400ms ease;
+              opacity 500ms cubic-bezier(0.25, 0.1, 0.25, 1);
   pointer-events: none;
 }
 
@@ -905,23 +1153,10 @@ html {
   pointer-events: auto;
 }
 
-/* Nav dark mode (sections sombres) */
-.site-nav.site-nav--dark {
-  background: rgba(15, 23, 42, 0.97);
-  border-bottom-color: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.site-nav--dark .site-nav-separator { background-color: rgba(255, 255, 255, 0.2); }
-.site-nav--dark .site-nav-link { color: rgba(255, 255, 255, 0.55); }
-.site-nav--dark .site-nav-link:hover { color: #FFFFFF; background-color: rgba(255, 255, 255, 0.1); }
-.site-nav--dark .site-nav-link.is-active { color: #FFFFFF; background-color: rgba(255, 255, 255, 0.12); }
-
 .site-nav-separator {
   width: 1px;
   height: 14px;
-  background-color: var(--color-gray-light);
+  background-color: rgba(255, 255, 255, 0.2);
   opacity: 0.7;
   flex-shrink: 0;
 }
@@ -930,7 +1165,7 @@ html {
   font-family: var(--font-body);
   font-size: var(--text-xs);
   font-weight: var(--weight-medium);
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.55);
   text-decoration: none;
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
@@ -941,14 +1176,14 @@ html {
 }
 
 .site-nav-link:hover {
-  color: var(--color-accent-ia);
-  background-color: var(--color-accent-ia-soft);
+  color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.1);
   text-decoration: none;
 }
 
 .site-nav-link.is-active {
-  color: var(--color-accent-ia);
-  background-color: var(--color-accent-ia-soft);
+  color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
 /* Dots (bord droit) */
@@ -1002,14 +1237,24 @@ html {
   display: block;
   width: 22px;
   height: 2px;
-  background: var(--color-text-primary);
+  background: #FFFFFF;
   margin: 5px 0;
   transition: transform 300ms ease, opacity 300ms ease;
   border-radius: 2px;
 }
 
-.site-nav--dark .nav-hamburger span {
-  background: #FFFFFF;
+/* Hamburger → X animation */
+.site-nav.nav-open .nav-hamburger span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.site-nav.nav-open .nav-hamburger span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.site-nav.nav-open .nav-hamburger span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 
@@ -1021,14 +1266,36 @@ html {
 @media (max-width: 1200px) {
   .a-propos-panel-image { flex: 0 0 260px; height: 200px; }
 
-  .chiffre-cle-valeur { font-size: 2.4rem; }
+  .carousel-card {
+    height: min(480px, calc(100vh - 300px));
+  }
+
+  .page-section--projets-suivis .carousel-card {
+    height: min(400px, calc(100vh - 380px));
+  }
 }
 
 /* ---------- Tablette (≤1024px) ---------- */
 @media (max-width: 1024px) {
-  .projets-grid--trois {
-    grid-template-columns: repeat(2, 1fr);
+  .carousel-card {
+    width: 380px;
+    height: min(460px, calc(100vh - 280px));
   }
+
+  .carousel-card-overlay { padding: 24px; }
+  .carousel-card-title { font-size: 1.4rem; }
+  .carousel-card-details { padding: 16px 24px; }
+  .carousel-card-desc { font-size: var(--text-xs); }
+
+  .page-section--projets-suivis .carousel-card-details { padding: 10px 20px 8px; }
+  .page-section--projets-suivis .carousel-card-desc { -webkit-line-clamp: 3; line-clamp: 3; }
+
+  .chiffres-cles {
+    height: 100px;
+    padding: var(--space-2) var(--space-6);
+  }
+
+  .chiffre-cle-valeur { font-size: 1.8rem; }
 
   .a-propos-panel--active {
     flex-wrap: wrap;
@@ -1131,29 +1398,40 @@ html {
 
   .hero-portrait-img { max-height: 60vh; }
 
-  /* Grilles → 1 colonne */
-  .projets-grid--trois {
-    grid-template-columns: 1fr;
-    max-width: 480px;
-    margin: 0 auto;
+  /* Carousel mobile */
+  .carousel-card {
+    width: 300px;
+    height: min(400px, calc(100vh - 240px));
   }
 
-  /* Chiffres-clés → horizontal compact */
+  .carousel-card.is-active { transform: scale(1.02); }
+  .carousel-card.is-active:hover { transform: scale(1.04); }
+  .carousel-card-overlay { padding: 20px; }
+  .carousel-card-title { font-size: 1.2rem; }
+  .carousel-card-subtitle { font-size: var(--text-sm); }
+  .carousel-card-details { padding: 14px 20px; }
+  .carousel-card-desc { font-size: var(--text-xs); -webkit-line-clamp: 2; line-clamp: 2; }
+
+  .page-section--projets-suivis .carousel-card-details { padding: 10px 16px 8px; }
+  .page-section--projets-suivis .carousel-card-desc { -webkit-line-clamp: 2; line-clamp: 2; }
+  .page-section--projets-suivis .carousel-card-visual { height: 60%; }
+  .page-section--projets-suivis .carousel-card-details { height: 40%; }
+  .carousel-edge { width: 80px; }
+
+  /* Chiffres-clés — compact horizontal */
   .chiffres-cles {
     flex-direction: row;
     flex-wrap: wrap;
     height: auto;
-    padding: var(--space-4);
-    gap: var(--space-4);
+    padding: var(--space-3);
+    gap: var(--space-3);
     justify-content: center;
   }
-
-  .chiffre-cle-graph { min-width: 100px; }
-  .chiffre-cle-valeur { font-size: 2rem; }
-
-  .chiffre-cle-bar-wrap { height: 60px; width: 36px; }
-  .chiffre-cle-blocks-wrap { height: 60px; width: 40px; }
-  .chiffre-cle-ring-wrap { width: 55px; height: 55px; }
+  .chiffre-cle-graph { min-width: 80px; }
+  .chiffre-cle-valeur { font-size: 1.8rem; }
+  .chiffre-cle-bar-wrap { height: 50px; width: 36px; }
+  .chiffre-cle-blocks-wrap { height: 50px; width: 36px; }
+  .chiffre-cle-star-wrap { width: 45px; height: 45px; }
 
   /* À propos */
   .a-propos-photo .photo--portrait { max-height: 180px; }
@@ -1239,17 +1517,19 @@ html {
   .section-title { font-size: var(--text-xl); }
   .section-contexte { font-size: var(--text-sm); }
 
-  .projet-card-titre { font-size: var(--text-base); }
-  .projet-card-description { font-size: var(--text-xs); }
-
-  .projets-grid--trois { max-width: 100%; }
-
-  .chiffres-cles {
-    padding: var(--space-3);
+  .carousel-card {
+    width: 260px;
+    height: min(360px, calc(100vh - 200px));
   }
 
-  .chiffre-cle-valeur { font-size: 1.6rem; }
-  .chiffre-cle-unite  { font-size: var(--text-xs); }
+  .carousel-card-mission { font-size: var(--text-xs); margin-bottom: 8px; }
+  .carousel-card-title { font-size: 1.1rem; }
+  .carousel-card-details { padding: 12px 16px; }
+  .carousel-card-overlay { padding: 16px; }
+  .carousel-card-tags .tag { font-size: 0.65rem; padding: 2px 6px; }
+
+  .page-section--projets-suivis .carousel-card-details { padding: 8px 12px 6px; }
+  .page-section--projets-suivis .carousel-card-desc { -webkit-line-clamp: 2; line-clamp: 2; }
 
   .a-propos-photo .photo--portrait { max-height: 150px; }
   .about-shape { width: 160px; height: 160px; }
@@ -1272,15 +1552,12 @@ html {
   .about-shape { width: 170px; height: 170px; }
   .about-shape::before { width: 200px; height: 200px; }
 
-  .chiffres-cles { height: 130px; }
-  .chiffre-cle-bar-wrap { height: 60px; }
-  .chiffre-cle-blocks-wrap { height: 60px; }
-  .chiffre-cle-valeur { font-size: 2rem; }
+  .carousel-card { height: min(440px, calc(100vh - 200px)); }
+  .carousel-card-details { padding: 16px 24px; }
+  .carousel-card-desc { -webkit-line-clamp: 2; line-clamp: 2; }
 
-  .projet-card-body { padding: var(--space-2) var(--space-3); }
-  .projet-card-titre { font-size: var(--text-base); }
-  .projet-card-description { font-size: var(--text-xs); }
-  .projet-card-visuels { aspect-ratio: 16 / 6; }
+  .page-section--projets-suivis .carousel-card-details { padding: 10px 20px 8px; }
+  .page-section--projets-suivis .carousel-card-desc { -webkit-line-clamp: 2; line-clamp: 2; }
 
   .section-header { margin-bottom: 0; }
   .section-title { margin-bottom: var(--space-2); font-size: var(--text-xl); }

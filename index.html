@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/design-system.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/projet-detail.css">
 </head>
 <body>
 
@@ -87,25 +88,21 @@
         <header class="section-header">
           <h2 class="section-title">Projets suivis</h2>
           <p class="section-contexte">
-            Projets réalisés dans un cadre de chef de projet,
-            avec un rôle de prospection, cadrage fonctionnel, chiffrage, négociation,
-            suivi et coordination technique.
+            Projets pilotés de bout en bout — prospection, cadrage, chiffrage, négotiation et coordination technique.
           </p>
         </header>
 
         <div class="chiffres-cles">
-
           <!-- Barre verticale — montant financier -->
           <div class="chiffre-cle-graph chiffre-cle-graph--bar">
             <div class="chiffre-cle-bar-wrap">
               <div class="chiffre-cle-bar" data-height="85"></div>
             </div>
             <div class="chiffre-cle-label">
-              <span class="chiffre-cle-valeur">+100k</span>
-              <span class="chiffre-cle-unite">€</span>
+              <span class="chiffre-cle-valeur">+100k€</span>
+              <span class="chiffre-cle-unite">signés</span>
             </div>
           </div>
-
           <!-- Blocs empilés — volume de projets -->
           <div class="chiffre-cle-graph chiffre-cle-graph--blocks">
             <div class="chiffre-cle-blocks-wrap">
@@ -116,91 +113,39 @@
               <div class="chiffre-cle-block" data-delay="5"></div>
             </div>
             <div class="chiffre-cle-label">
-              <span class="chiffre-cle-valeur">+10</span>
+              <span class="chiffre-cle-valeur">+15</span>
               <span class="chiffre-cle-unite">projets</span>
             </div>
           </div>
-
-          <!-- Anneau segmenté — diversification -->
-          <div class="chiffre-cle-graph chiffre-cle-graph--ring">
-            <div class="chiffre-cle-ring-wrap">
-              <svg class="chiffre-cle-ring" viewBox="0 0 80 80">
-                <circle class="ring-segment ring-segment--1" cx="40" cy="40" r="30"
-                        stroke-dashoffset="0"/>
-                <circle class="ring-segment ring-segment--2" cx="40" cy="40" r="30"
-                        stroke-dashoffset="-63"/>
-                <circle class="ring-segment ring-segment--3" cx="40" cy="40" r="30"
-                        stroke-dashoffset="-126"/>
+          <!-- Étoile — taux de réussite -->
+          <div class="chiffre-cle-graph chiffre-cle-graph--star">
+            <div class="chiffre-cle-star-wrap">
+              <svg class="chiffre-cle-star" viewBox="0 0 80 80">
+                <defs>
+                  <linearGradient id="star-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#1d4ed8"/>
+                    <stop offset="45%" stop-color="#3b82f6"/>
+                    <stop offset="100%" stop-color="#d97706"/>
+                  </linearGradient>
+                </defs>
+                <polygon class="star-path" points="40,6 49,28 72,28 54,44 61,67 40,52 19,67 26,44 8,28 31,28" fill="url(#star-grad)"/>
               </svg>
             </div>
             <div class="chiffre-cle-label">
-              <span class="chiffre-cle-valeur">+3</span>
-              <span class="chiffre-cle-unite">piliers</span>
+              <span class="chiffre-cle-valeur">100%</span>
+              <span class="chiffre-cle-unite">clôturés</span>
             </div>
           </div>
-
         </div>
 
-        <div class="projets-grid projets-grid--trois">
-
-          <article class="projet-card">
-            <div class="projet-card-visuels">
-              <img src="assets/images/logos/logo-cea.png" alt="Logo CEA" class="projet-card-image">
-            </div>
-            <div class="projet-card-body">
-              <h3 class="projet-card-titre">Extraction intelligente d'exigences — CEA</h3>
-              <p class="projet-card-description">
-                Automatisation de l'identification d'exigences dans des cahiers
-                des charges complexes via un pipeline IA sécurisé.
-              </p>
-              <ul class="projet-card-tags">
-                <li class="tag">Python</li>
-                <li class="tag">LangChain</li>
-                <li class="tag">Docker</li>
-                <li class="tag">FastAPI</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="projet-card">
-            <div class="projet-card-visuels">
-              <img src="assets/images/logos/logo-atexo.png" alt="Logo ATEXO" class="projet-card-image">
-            </div>
-            <div class="projet-card-body">
-              <h3 class="projet-card-titre">POC IA – Analyse d'appels d'offres publics — ATEXO</h3>
-              <p class="projet-card-description">
-                POC IA pour extraire et structurer automatiquement
-                les informations clés de dossiers de candidature.
-              </p>
-              <ul class="projet-card-tags">
-                <li class="tag">RAG</li>
-                <li class="tag">LLM</li>
-                <li class="tag">NLP</li>
-                <li class="tag">PostgreSQL</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="projet-card">
-            <div class="projet-card-visuels">
-              <img src="assets/images/logos/logo-provexi.png" alt="Logo PROVEXI" class="projet-card-image">
-            </div>
-            <div class="projet-card-body">
-              <h3 class="projet-card-titre">Intelligent Document Processing (IDP)</h3>
-              <p class="projet-card-description">
-                Solution modulaire de traitement automatique de documents techniques
-                avec OCR et règles d'extraction adaptables.
-              </p>
-              <ul class="projet-card-tags">
-                <li class="tag">OCR</li>
-                <li class="tag">FastAPI</li>
-                <li class="tag">OpenRouter</li>
-                <li class="tag">Streamlit</li>
-              </ul>
-            </div>
-          </article>
-
+        <!-- Carousel projets suivis -->
+        <div class="carousel-container">
+          <div class="carousel-edge carousel-edge--left carousel-edge--light" aria-hidden="true"></div>
+          <div class="carousel-edge carousel-edge--right carousel-edge--light" aria-hidden="true"></div>
+          <div class="carousel-track" id="carousel-track-suivis"></div>
         </div>
+        <div class="carousel-dots" id="carousel-dots-suivis"></div>
+
       </div>
     </section>
 
@@ -219,70 +164,14 @@
           </p>
         </header>
 
-        <div class="projets-grid projets-grid--trois">
-
-          <article class="projet-card">
-            <div class="projet-card-visuels">
-              <img src="assets/images/logos/logo-pb.jpeg" alt="Logo PB" class="projet-card-image">
-            </div>
-            <div class="projet-card-body">
-              <h3 class="projet-card-titre">Scripts Python – Structuration de données LinkedIn</h3>
-              <p class="projet-card-description">
-                Scripts Python permettant de collecter, nettoyer
-                et reformater automatiquement les données de profils LinkedIn
-                pour entreprise de Research Talent dans des fichiers Excel exploitables.
-              </p>
-              <ul class="projet-card-tags">
-                <li class="tag">Pandas</li>
-                <li class="tag">python-pptx</li>
-                <li class="tag">openpyxl</li>
-                <li class="tag">lxml</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="projet-card">
-            <div class="projet-card-visuels">
-              <img src="assets/images/logos/logo-etic.png" alt="Logo ETIC" class="projet-card-image">
-            </div>
-            <div class="projet-card-body">
-              <h3 class="projet-card-titre">Propale Bot – Automatisation commerciale</h3>
-              <p class="projet-card-description">
-                Outil interne automatisant la génération de propositions commerciales,
-                contrats, mises à jour CRM et contenus associés via IA.
-              </p>
-              <ul class="projet-card-tags">
-                <li class="tag">OpenAI API</li>
-                <li class="tag">Google Apps Script</li>
-                <li class="tag">Docker</li>
-                <li class="tag">OVH</li>
-                <li class="tag">API HubSpot</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="projet-card">
-            <div class="projet-card-visuels">
-              <img src="assets/images/projets/feu_capteurs.jpeg" alt="Capteur IoT feux de forêt"
-                   class="projet-card-image">
-            </div>
-            <div class="projet-card-body">
-              <h3 class="projet-card-titre">Système IoT de prévention des feux de forêt — ESSI</h3>
-              <p class="projet-card-description">
-                Réseau de capteurs environnementaux (température, humidité, CO₂, particules fines)
-                avec transmission LoRaWAN optimisée et visualisation temps réel,
-                intégrant des seuils de détection intelligents basés sur l'IFM.
-              </p>
-              <ul class="projet-card-tags">
-                <li class="tag">IoT</li>
-                <li class="tag">LoRaWAN</li>
-                <li class="tag">HTML / CSS</li>
-                <li class="tag">JavaScript</li>
-              </ul>
-            </div>
-          </article>
-
+        <!-- Carousel projets personnels -->
+        <div class="carousel-container">
+          <div class="carousel-edge carousel-edge--left" aria-hidden="true"></div>
+          <div class="carousel-edge carousel-edge--right" aria-hidden="true"></div>
+          <div class="carousel-track" id="carousel-track-perso"></div>
         </div>
+        <div class="carousel-dots" id="carousel-dots-perso"></div>
+
       </div>
     </section>
 
