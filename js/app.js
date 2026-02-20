@@ -746,6 +746,39 @@
       else if (e.key === 'ArrowRight') centerOn(activeIndex + 1, true);
     });
 
+    /* Horizontal wheel / trackpad swipe on carousel */
+    var carouselWheelAcc = 0;
+    var carouselWheelTimer = null;
+    var CAROUSEL_WHEEL_THRESHOLD = 50;
+    var carouselWheelCooldown = false;
+
+    var container = track.parentElement;
+    container.addEventListener('wheel', function (e) {
+      /* Determine dominant axis */
+      var absX = Math.abs(e.deltaX);
+      var absY = Math.abs(e.deltaY);
+
+      /* If horizontal scroll is dominant (trackpad swipe) */
+      if (absX > absY && absX > 2) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (carouselWheelCooldown) return;
+
+        carouselWheelAcc += e.deltaX;
+        clearTimeout(carouselWheelTimer);
+        carouselWheelTimer = setTimeout(function () { carouselWheelAcc = 0; }, 200);
+
+        if (Math.abs(carouselWheelAcc) >= CAROUSEL_WHEEL_THRESHOLD) {
+          var dir = carouselWheelAcc > 0 ? 1 : -1;
+          carouselWheelAcc = 0;
+          clearTimeout(carouselWheelTimer);
+          carouselWheelCooldown = true;
+          centerOn(activeIndex + dir, true);
+          setTimeout(function () { carouselWheelCooldown = false; }, 600);
+        }
+      }
+    }, { passive: false });
+
     /* Init */
     centerOn(activeIndex, false);
     window.addEventListener('resize', function () {

@@ -436,6 +436,7 @@ html {
   backdrop-filter: blur(12px);
   height: 38%;
   padding: 12px 28px 10px;
+  overflow: hidden;
 }
 
 .page-section--projets-suivis .carousel-card-visual {
@@ -470,6 +471,7 @@ html {
 .page-section--projets-suivis .carousel-card-tags {
   margin-top: auto;
   padding-top: 4px;
+  flex-shrink: 0;
 }
 
 .page-section--projets-suivis .carousel-card-tags .tag {
@@ -712,7 +714,8 @@ html {
   padding: 20px 32px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  overflow: hidden;
 }
 
 .carousel-card-accent-line {
@@ -728,6 +731,7 @@ html {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-shrink: 0;
 }
 
 .carousel-card-label {
@@ -765,6 +769,8 @@ html {
   line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 .carousel-card-tags {
@@ -772,6 +778,8 @@ html {
   flex-wrap: wrap;
   gap: var(--space-2);
   list-style: none;
+  flex-shrink: 0;
+  margin-top: auto;
 }
 
 .carousel-card-tags .tag {
