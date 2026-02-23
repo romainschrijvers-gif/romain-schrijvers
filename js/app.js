@@ -1,4 +1,4 @@
-/* ============================================================
+﻿/* ============================================================
    APP.JS — Portfolio Romain SCHRIJVERS
    ============================================================
    Snap navigation, nav header (+ hamburger mobile),
@@ -302,183 +302,9 @@
      CAROUSEL — Projets suivis + Projets personnels
      ================================================================== */
 
-  /* Project lookup map for detail pages */
-  var ALL_PROJECTS = {};
+  /* Project data is loaded from projects-data.js (shared with projet.html) */
 
-  var PROJECTS_SUIVIS = [
-    {
-      id: 'cea',
-      title: 'Extraction intelligente d\'exigences',
-      subtitle: 'Pipeline IA sécurisé',
-      mission: 'ACCÉLLÉRER ET FIABILISER LES PROCESSUS',
-      description: 'Automatisation de l\'identification d\'exigences dans des cahiers des charges complexes via un pipeline IA sécurisé.',
-      image: 'assets/images/projets/cea.jpeg',
-      logo: 'assets/images/logos/logo-cea.png',
-      logoAlt: 'CEA',
-      tags: ['Python', 'LangFlow', 'HolIAGen/Open WebUI'],
-      detail: {
-        category: 'Projet suivi',
-        contexte: 'Ouverture d\'un grand compte stratégique (CEA) autour d\'un besoin d\'automatisation de l\'analyse documentaire. L\'objectif était d\'industrialiser l\'extraction d\'exigences depuis des cahiers des charges volumineux et hétérogènes grâce à une solution IA locale combinant OCR, NLP, et IDP, tout en garantissant la confidentialité des données.\n\n\n',
-        methode: 'Prospection et qualification du besoin auprès des équipes métiers, cadrage technique et chiffrage de la solution. Coordination du développement d\'un pipeline IA modulaire : pré-traitement documentaire, extraction sémantique automatisée, scoring de fiabilité et export structuré. Pilotage projet, suivi client et accompagnement jusqu\'à la validation opérationnelle.',
-        kpis: [
-          { value: '60-70%', label: 'Réduction du temps d\'analyse documentaire' },
-          { value: '↓ erreurs', label: 'Scoring automatisé de fiabilité' },
-          { value: '100%', label: 'Traitement local & souverain' },
-          { value: 'Auto', label: 'Structuration des exigences' }
-        ],
-        technos: ['OCR', 'NLP', 'LLM', 'HolIAGen/Open WebUI', 'LangFlow']
-      }
-    },
-    {
-      id: 'atexo',
-      title: 'POC IA – Analyse d\'appels d\'offres',
-      subtitle: 'Extraction et classification automatique',
-      mission: 'PRÉSÉLECTION DES CANDIDATURES',
-      description: 'POC IA pour extraire et structurer automatiquement les informations clés de dossiers de candidature.',
-      image: 'assets/images/projets/atexo-projet.jpeg',
-      logo: 'assets/images/logos/logo-atexo.png',
-      logoAlt: 'ATEXO',
-      tags: ['RAG', 'LLM', 'NLP', 'PostgreSQL'],
-      detail: {
-        category: 'Projet suivi',
-        contexte: 'Accompagnement d\'Atexo dans l\'exploration d\'un module IA destiné à automatiser l\'analyse de dossiers d\'appels d\'offres. L\'objectif était de valider la faisabilité technique d\'une solution capable d\'extraire, structurer et comparer automatiquement les informations clés pour fiabiliser et accélérer la prise de décision.\n\n\n',
-        methode: 'Qualification du besoin, cadrage technique et chiffrage de l\'étude. Pilotage d\'un prototype IA comparant plusieurs approches (LLM, RAG), puis coordination du développement d\'une API REST industrialisable (FastAPI, orchestration asynchrone, déploiement Docker). Suivi client et structuration des recommandations techniques pour la phase d\'industrialisation.',
-        kpis: [
-          { value: '80%', label: 'Réduction du temps de pré-analyse' },
-          { value: 'Validé', label: 'Faisabilité IA confirmée' },
-          { value: 'Scalable', label: 'Architecture prête à l\'intégration' },
-          { value: '↑ fiabilité', label: 'Traçabilité des analyses' }
-        ],
-        technos: ['RabbitMQ', 'Docker', 'Nginx', 'OVH Cloud', 'LLM', 'RAG', 'LangChain', 'FastAPI']
-      }
-    },
-    {
-      id: 'provexi',
-      title: 'Intelligent Document Processing',
-      subtitle: 'Traitement automatique de documents',
-      mission: 'DIGITALISER LE DOCUMENT',
-      description: 'Solution modulaire de traitement automatique de documents techniques avec OCR et règles d\'extraction adaptables.',
-      image: 'assets/images/projets/projet-provexi.png',
-      logo: 'assets/images/logos/logo-provexi.png',
-      logoAlt: 'PROVEXI',
-      tags: ['OCR', 'FastAPI', 'OpenRouter', 'Streamlit'],
-      detail: {
-        category: 'Projet suivi',
-        contexte: 'Provexi, société spécialisée dans la vérification technique et la gestion documentaire industrielle, souhaitait automatiser l\'exploitation de documents variés (rapports de vérification, factures, devis, rapports d\'intervention, etc.). L\'objectif était de créer un outil d\'Intelligent Document Processing capable d\'extraire automatiquement les données métier tout en permettant une adaptation simple à tout type de document.\n\n',
-        methode: 'Qualification du besoin, cadrage fonctionnel et pilotage du développement d\'une solution IDP modulaire. Mise en place d\'une pipeline intelligente combinant classification automatique des documents, OCR si nécessaire et extraction configurable en no-code. Les équipes métier peuvent ainsi ajuster elles-mêmes les règles d\'extraction, la classification et les prompts sans intervention technique.',
-        kpis: [
-          { value: '60%', label: 'Gain sur le traitement documentaire' },
-          { value: 'No-code', label: 'Paramétrage autonome des équipes' },
-          { value: '↑ fiabilité', label: 'Extraction d\'informations critiques' },
-          { value: 'Adaptatif', label: 'Tout type de document' }
-        ],
-        technos: ['IDP', 'OCR', 'NLP', 'Streamlit', 'JSON/Excel export']
-      }
-    }
-  ];
-
-  var PROJECTS_PERSO = [
-    {
-      id: 'socotec',
-      title: 'Outil de pilotage marché',
-      subtitle: 'Visualisation Power BI et API Sitadel',
-      mission: 'ANALYSER LE MARCHÉ',
-      description: 'Visualisation Power BI des différences marché vs SOCOTEC avec extractions de données web automatique via API publique Sitadel.',
-      image: 'assets/images/projets/socotec-projet.jpeg',
-      logo: 'assets/images/logos/logos-socotec.png',
-      logoAlt: 'SOCOTEC',
-      tags: ['Power BI', 'API Sitadel', 'Data modeling', 'ETL'],
-      detail: {
-        category: 'Mission en cours',
-        contexte: 'Mission en cours chez Socotec, acteur majeur du testing, inspection et certification dans les secteurs de la construction, de l\'immobilier et des infrastructures. Projet visant à concevoir un outil d\'analyse de marché permettant de comparer la performance commerciale interne aux dynamiques réelles du secteur. L\'objectif est de croiser les données publiques marché issues de l\'API Sitadel 2 avec les données internes du data lake Socotec.\n\n',
-        methode: 'Connexion et extraction des données via l\'API Sitadel 2, récupération des données internes depuis le data lake Socotec, harmonisation et normalisation des bases hétérogènes. Travail approfondi de data modeling (schéma étoile, structuration des dimensions métiers). Développement d\'un dashboard Power BI intégré à l\'environnement de production, permettant une analyse multi-niveaux (département, segment d\'activité, agence).',
-        kpis: [
-          { value: 'Auto', label: 'Analyses auparavant manuelles' },
-          { value: '360°', label: 'Vision marché vs performance interne' },
-          { value: '↑ ciblage', label: 'Segments à fort potentiel identifiés' },
-          { value: 'Data-driven', label: 'Décisions stratégiques accélérées' }
-        ],
-        technos: ['API Sitadel 2', 'Power BI', 'Data Lake', 'Data modeling', 'ETL', 'Schéma étoile']
-      }
-    },
-    {
-      id: 'pb',
-      title: 'Scripts Python',
-      subtitle: 'Structuration de données LinkedIn',
-      mission: 'AUTOMATISER LA COLLECTE DE DONNÉES',
-      description: 'Pipeline Python : LinkedIn → Excel/PPT pour livrables clients d’un cabinet londonien de Talent Research',
-      image: 'assets/images/projets/projet-pb.png',
-      logo: 'assets/images/logos/logo-pb.jpeg',
-      logoAlt: 'Parkhouse Bell',
-      tags: ['Pandas', 'python-pptx', 'openpyxl', 'lxml'],
-      detail: {
-        category: 'Projet personnel',
-        contexte: 'Lors d\'un stage chez Parkhouse Bell (cabinet de talent research basé à Londres), la production de livrables clients reposait sur une saisie manuelle fastidieuse des profils LinkedIn vers Excel puis PowerPoint. L\'automatisation semblait initialement impossible en raison des contraintes techniques de la plateforme. L\'objectif a été de rendre ce processus industrialisable tout en respectant strictement le cadre RGPD.',
-        methode: 'Après analyse des limitations applicatives, j\'ai identifié une approche ingénieuse exploitant les fonctionnalités accessibles aux utilisateurs standards pour structurer l\'extraction sans enfreindre les règles d\'usage ni le cadre RGPD. Développement d\'un script Python local permettant de transformer ces données en exports Excel consolidés et en présentations PowerPoint automatisées. Projet mené en totale auto-formation, dans un environnement professionnel anglophone (Londres / Manchester).',
-        kpis: [
-          { value: '~200h', label: 'Économisées par semaine' },
-          { value: '↑ innovation', label: 'Processus auparavant impossible' },
-          { value: '↓↓', label: 'Tâches manuelles répétitives' },
-          { value: '↑ focus', label: 'Analyse qualitative & entretiens' }
-        ],
-        technos: ['Python', 'python-pptx', 'openpyxl', 'data scraping', 'RGPD']
-      }
-    },
-    {
-      id: 'propale-bot',
-      title: 'Propale Bot',
-      subtitle: 'Automatisation commerciale',
-      mission: 'ACCÉLLÉRER ET FIABILISER LES PROCESSUS COMMERCIAUX',
-      description: 'App web interne automatisant la génération de propositions commerciales, contrats, mises à jour CRM via IA.',
-      image: 'assets/images/projets/propale-bot.png',
-      logo: 'assets/images/logos/logo-etic.png',
-      logoAlt: 'ETIC INSA Technologies',
-      tags: ['Google Apps Script', 'Docker', 'OVH', 'API HubSpot'],
-      detail: {
-        category: 'Projet personnel',
-        contexte: 'En tant que Responsable Commercial au sein d\'ETIC INSA Technologies (Junior-Entreprise de l\'INSA Lyon), j\'ai constaté un temps excessif consacré à la production manuelle de propositions commerciales. Ce temps opérationnel limitait la capacité à challenger techniquement et budgétairement les études, tout en générant des incohérences dans le CRM et la facturation. L\'objectif a été d\'industrialiser et fiabiliser l\'ensemble du cycle avant-vente → contractualisation → CRM.',
-        methode: 'Conception d\'un outil interne automatisant la génération complète des propositions commerciales à partir d\'un document de phasage fourni par les intervenants. Intégration de limites contractuelles et développement méthodologique enrichies par l\'historique des meilleures études. Automatisation du passage de la proposition signée au contrat final, puis synchronisation directe avec HubSpot. Architecture API dockerisée, exposée via Nginx et déployée sur OVH, avec intégration de LLM.',
-        kpis: [
-          { value: '10-30min', label: 'Au lieu de 4 à 6 heures' },
-          { value: '↓ délais', label: 'Cycle de vente accéléré' },
-          { value: '↑ fiabilité', label: 'Cohérence devis / CRM / facturation' },
-          { value: '↑ qualité', label: 'Plus de temps pour le challenge technique' }
-        ],
-        technos: ['Python', 'API REST', 'HubSpot API', 'LLM', 'Docker', 'Nginx', 'OVH Cloud']
-      }
-    },
-    {
-      id: 'capteurs-iot',
-      title: 'Système IoT et data visualisation',
-      subtitle: 'Détection et prévention des feux de forêt',
-      mission: 'PROTÉGER L\'ENVIRONNEMENT',
-      description: 'Réseau de capteurs environnementaux avec transmission LoRaWAN optimisée et visualisation temps réel',
-      image: 'assets/images/projets/iot.png',
-      logo: 'assets/images/logos/logo-insa.png',
-      logoAlt: 'INSA Lyon',
-      tags: ['IoT', 'LoRaWAN', 'HTML / CSS', 'JavaScript'],
-      detail: {
-        category: 'Projet académique',
-        contexte: 'Projet académique de fin de prépa à l\'INSA Lyon visant la conception d\'un système de prévention et détection des feux de forêt. L\'objectif était de combiner capteurs environnementaux, transmission IoT longue portée et analyse intelligente des données afin d\'anticiper les risques d\'incendie tout en intégrant des enjeux d\'innovation, d\'acceptabilité et d\'impact sociétal.\n\n',
-        methode: 'Conception d\'un réseau de capteurs connectés mesurant paramètres climatiques et environnementaux (température, humidité, vent, CO₂, particules). Transmission des données via LoRaWAN vers un système d\'analyse intégrant indicateurs métiers (IFM, seuils dynamiques) et visualisation des alertes. Approche orientée sobriété énergétique, avec modes de transmission adaptatifs selon le niveau de risque.',
-        kpis: [
-          { value: '↑ réactivité', label: 'Détection des risques d\'incendie' },
-          { value: '↓ énergie', label: 'Transmission intelligente' },
-          { value: 'Temps réel', label: 'Visualisation centralisée' },
-          { value: 'Modulaire', label: 'Adaptable à tout contexte' }
-        ],
-        technos: ['IoT', 'Capteurs', 'LoRaWAN', 'ESP32', 'Data monitoring']
-      }
-    },
-  ];
-
-  /* Build project lookup map */
-  PROJECTS_PERSO.forEach(function (p) { p._isPerso = true; });
-  PROJECTS_SUIVIS.concat(PROJECTS_PERSO).forEach(function (p) {
-    ALL_PROJECTS[p.id] = p;
-  });
-
-  /* --- Generic carousel factory --- */
+    /* --- Generic carousel factory --- */
   function createCarousel(projects, trackId, dotsId) {
     var track = document.getElementById(trackId);
     var dotsContainer = document.getElementById(dotsId);
@@ -667,7 +493,7 @@
         if (clickedCard && Math.abs(totalDx) < 5) {
           var projectId = clickedCard.dataset.projectId;
           if (projectId && typeof openProjectDetail === 'function') {
-            openProjectDetail(projectId, clickedCard);
+            openProjectDetail(projectId);
             return;
           }
         }
@@ -718,7 +544,7 @@
         if (tappedCard) {
           var projectId = tappedCard.dataset.projectId;
           if (projectId && typeof openProjectDetail === 'function') {
-            openProjectDetail(projectId, tappedCard);
+            openProjectDetail(projectId);
             touchStartTarget = null;
             dragDirection = null;
             return;
@@ -833,167 +659,11 @@
 
 
   /* ==================================================================
-     PROJECT DETAIL OVERLAY — Open / Close / Render
+     PROJECT DETAIL  Navigate to standalone page
      ================================================================== */
 
-  var detailOverlay = null;
-  var detailIsOpen = false;
-  var pageWrapper = document.querySelector('.page-wrapper');
-
-  function renderDetailHTML(project) {
-    var d = project.detail;
-
-    var kpisHTML = d.kpis.map(function (kpi) {
-      return '<div class="detail-kpi">' +
-        '<div class="detail-kpi-value">' + kpi.value + '</div>' +
-        '<div class="detail-kpi-label">' + kpi.label + '</div>' +
-      '</div>';
-    }).join('');
-
-    var technosHTML = d.technos.map(function (t) {
-      return '<li class="detail-stack-chip">' + t + '</li>';
-    }).join('');
-
-    return '<button class="detail-back" aria-label="Retour aux projets">' +
-      '<svg viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
-      'Retour' +
-    '</button>' +
-    '<div class="detail-content">' +
-      '<div class="detail-header">' +
-        '<div class="detail-header-left">' +
-          '<p class="detail-mission">' + project.mission + '</p>' +
-          '<h2 class="detail-title">' + project.title + '</h2>' +
-          '<p class="detail-subtitle">' + project.subtitle + '</p>' +
-        '</div>' +
-        '<div class="detail-header-right">' +
-          '<img src="' + project.logo + '" alt="' + project.logoAlt + '" class="detail-logo">' +
-          '<span class="detail-category">' + d.category + '</span>' +
-        '</div>' +
-      '</div>' +
-      '<div class="detail-body">' +
-        '<div class="detail-left">' +
-          '<div class="detail-image-wrap">' +
-            '<div class="detail-image-glow" aria-hidden="true"></div>' +
-            '<img src="' + project.image + '" alt="' + project.title + '" class="detail-image" loading="lazy">' +
-            '<div class="detail-image-overlay" aria-hidden="true"></div>' +
-          '</div>' +
-          '<div class="detail-kpis">' + kpisHTML + '</div>' +
-        '</div>' +
-        '<div class="detail-right">' +
-          '<div class="detail-section" data-delay="1">' +
-            '<h3 class="detail-section-title">Contexte & objectif</h3>' +
-            '<p class="detail-section-text">' + d.contexte + '</p>' +
-          '</div>' +
-          '<hr class="detail-divider">' +
-          '<div class="detail-section" data-delay="2">' +
-            '<h3 class="detail-section-title">M\u00e9thode de travail</h3>' +
-            (function () {
-              var sentences = d.methode.split(/\.\s+|\.$/).filter(function (s) { return s.trim().length > 0; });
-              var items = sentences.map(function (s) { return '<li>' + s.trim() + '.</li>'; }).join('');
-              return '<ul class="detail-method-list">' + items + '</ul>';
-            })() +
-          '</div>' +
-          '<hr class="detail-divider">' +
-          '<div class="detail-stack">' +
-            '<h4 class="detail-stack-title">Stack technique</h4>' +
-            '<ul class="detail-stack-list">' + technosHTML + '</ul>' +
-          '</div>' +
-        '</div>' +
-      '</div>' +
-    '</div>';
-  }
-
-  function openProjectDetail(projectId, cardEl) {
-    var project = ALL_PROJECTS[projectId];
-    if (!project || detailIsOpen) return;
-    detailIsOpen = true;
-
-    /* Calculate reveal origin from clicked card */
-    var rect = cardEl.getBoundingClientRect();
-    var cx = ((rect.left + rect.width / 2) / window.innerWidth * 100).toFixed(1);
-    var cy = ((rect.top + rect.height / 2) / window.innerHeight * 100).toFixed(1);
-
-    /* Create overlay */
-    detailOverlay = document.createElement('div');
-    detailOverlay.className = 'project-detail-overlay';
-    if (!project._isPerso) {
-      detailOverlay.classList.add('project-detail-overlay--light');
-    }
-    detailOverlay.style.setProperty('--reveal-x', cx + '%');
-    detailOverlay.style.setProperty('--reveal-y', cy + '%');
-    detailOverlay.innerHTML = renderDetailHTML(project);
-    document.body.appendChild(detailOverlay);
-
-    /* Prevent background scrolling */
-    document.body.style.overflow = 'hidden';
-    if (pageWrapper) pageWrapper.classList.add('is-detail-open');
-
-    /* Trigger circular reveal */
-    requestAnimationFrame(function () {
-      detailOverlay.classList.add('is-entering');
-    });
-
-    /* After reveal animation, mark as fully active & stagger-reveal content */
-    detailOverlay.addEventListener('animationend', function onRevealEnd(e) {
-      if (e.animationName !== 'detailReveal') return;
-      detailOverlay.removeEventListener('animationend', onRevealEnd);
-      detailOverlay.classList.remove('is-entering');
-      detailOverlay.classList.add('is-active');
-      revealDetailContent();
-    });
-
-    /* Back button */
-    var backBtn = detailOverlay.querySelector('.detail-back');
-    if (backBtn) {
-      backBtn.addEventListener('click', function () {
-        closeProjectDetail();
-      });
-    }
-
-    /* Close on Escape */
-    document.addEventListener('keydown', handleDetailEscape);
-  }
-
-  function revealDetailContent() {
-    if (!detailOverlay) return;
-    var elements = detailOverlay.querySelectorAll(
-      '.detail-header, .detail-image-wrap, .detail-kpis, .detail-section, .detail-stack'
-    );
-    elements.forEach(function (el) {
-      el.classList.add('is-revealed');
-    });
-  }
-
-  function closeProjectDetail() {
-    if (!detailOverlay || !detailIsOpen) return;
-
-    /* Start closing animation */
-    detailOverlay.classList.remove('is-active');
-    detailOverlay.classList.add('is-closing');
-
-    /* Un-blur main content */
-    if (pageWrapper) pageWrapper.classList.remove('is-detail-open');
-
-    detailOverlay.addEventListener('animationend', function onCloseEnd(e) {
-      if (e.animationName !== 'detailClose') return;
-      detailOverlay.removeEventListener('animationend', onCloseEnd);
-
-      /* Remove overlay from DOM */
-      if (detailOverlay && detailOverlay.parentNode) {
-        detailOverlay.parentNode.removeChild(detailOverlay);
-      }
-      detailOverlay = null;
-      detailIsOpen = false;
-      document.body.style.overflow = '';
-    });
-
-    document.removeEventListener('keydown', handleDetailEscape);
-  }
-
-  function handleDetailEscape(e) {
-    if (e.key === 'Escape') {
-      closeProjectDetail();
-    }
+  function openProjectDetail(projectId) {
+    window.location.href = 'projet.html?id=' + encodeURIComponent(projectId);
   }
 
 

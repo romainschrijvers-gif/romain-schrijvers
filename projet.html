@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projet — Romain SCHRIJVERS</title>
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/projet-detail.css">
+  <style>
+    /* Page-level styles for standalone detail page */
+    body {
+      margin: 0;
+      background: #0f172a;
+      min-height: 100vh;
+    }
+
+    .detail-page {
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Decorative gradient orbs */
+    .detail-page::before,
+    .detail-page::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(100px);
+      opacity: 0.3;
+    }
+
+    .detail-page::before {
+      width: 600px;
+      height: 600px;
+      top: -200px;
+      right: -100px;
+      background: radial-gradient(circle, rgba(29, 78, 216, 0.3) 0%, transparent 70%);
+    }
+
+    .detail-page::after {
+      width: 400px;
+      height: 400px;
+      bottom: -100px;
+      left: -50px;
+      background: radial-gradient(circle, rgba(217, 119, 6, 0.2) 0%, transparent 70%);
+    }
+
+    /* Light variant for projets suivis */
+    .detail-page--light {
+      background: rgba(249, 250, 251, 0.98);
+    }
+
+    body:has(.detail-page--light) {
+      background: #f9fafb;
+    }
+
+    .detail-page--light::before {
+      background: radial-gradient(circle, rgba(29, 78, 216, 0.06) 0%, transparent 70%);
+      opacity: 0.5;
+    }
+
+    .detail-page--light::after {
+      background: radial-gradient(circle, rgba(217, 119, 6, 0.05) 0%, transparent 70%);
+      opacity: 0.5;
+    }
+
+    /* Override fixed positioning from overlay approach to work as a normal page */
+    .detail-page .detail-back {
+      position: fixed;
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Content uses real flow instead of flex/overlay */
+    .detail-page .detail-content {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Animate in on page load */
+    .detail-page .detail-header,
+    .detail-page .detail-image-wrap,
+    .detail-page .detail-kpis,
+    .detail-page .detail-section,
+    .detail-page .detail-stack {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    .detail-page.is-loaded .detail-header {
+      opacity: 1; transform: translateY(0);
+      transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
+    }
+
+    .detail-page.is-loaded .detail-image-wrap {
+      opacity: 1; transform: translateX(0) scale(1);
+      transition: opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
+    }
+
+    .detail-page.is-loaded .detail-kpis {
+      opacity: 1; transform: translateY(0);
+      transition: opacity 0.6s ease 0.35s, transform 0.6s ease 0.35s;
+    }
+
+    .detail-page.is-loaded .detail-section[data-delay="1"] {
+      opacity: 1; transform: translateY(0);
+      transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;
+    }
+
+    .detail-page.is-loaded .detail-section[data-delay="2"] {
+      opacity: 1; transform: translateY(0);
+      transition: opacity 0.6s ease 0.45s, transform 0.6s ease 0.45s;
+    }
+
+    .detail-page.is-loaded .detail-stack {
+      opacity: 1; transform: translateY(0);
+      transition: opacity 0.6s ease 0.55s, transform 0.6s ease 0.55s;
+    }
+
+    /* Light variant text overrides (same as overlay light) */
+    .detail-page--light .detail-back {
+      color: var(--color-text-secondary);
+      background: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+    .detail-page--light .detail-back:hover {
+      color: var(--color-text-primary);
+      background: rgba(0, 0, 0, 0.08);
+      border-color: rgba(0, 0, 0, 0.15);
+    }
+    .detail-page--light .detail-mission { color: var(--color-accent-ia-mid); }
+    .detail-page--light .detail-title { color: var(--color-text-primary); }
+    .detail-page--light .detail-subtitle { color: var(--color-text-secondary); }
+    .detail-page--light .detail-header { border-bottom-color: rgba(0, 0, 0, 0.06); }
+    .detail-page--light .detail-section-title { color: var(--color-text-primary); }
+    .detail-page--light .detail-section-text { color: var(--color-text-secondary); }
+    .detail-page--light .detail-method-list li { color: var(--color-text-secondary); }
+    .detail-page--light .detail-divider { background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.08), transparent); }
+    .detail-page--light .detail-kpi { background: rgba(0, 0, 0, 0.02); border-color: rgba(0, 0, 0, 0.06); }
+    .detail-page--light .detail-kpi:hover { background: rgba(29, 78, 216, 0.04); border-color: rgba(29, 78, 216, 0.12); }
+    .detail-page--light .detail-kpi-label { color: var(--color-text-secondary); }
+    .detail-page--light .detail-stack-title { color: var(--color-text-secondary); }
+    .detail-page--light .detail-stack-chip { color: var(--color-accent-ia); background: rgba(29, 78, 216, 0.06); border-color: rgba(29, 78, 216, 0.12); }
+    .detail-page--light .detail-stack-chip:hover { background: rgba(29, 78, 216, 0.12); border-color: rgba(29, 78, 216, 0.25); }
+    .detail-page--light .detail-image-wrap::after { border-color: rgba(0, 0, 0, 0.08); }
+    .detail-page--light .detail-image-overlay { background: linear-gradient(to top, rgba(249, 250, 251, 0.4), transparent); }
+    .detail-page--light .detail-image-glow { background: radial-gradient(circle, rgba(29, 78, 216, 0.06) 0%, transparent 70%); }
+
+    /* Responsive adjustments for standalone page */
+    @media (max-width: 768px) {
+      .detail-page .detail-content {
+        min-height: auto;
+        padding-bottom: 40px;
+      }
+      .detail-page .detail-body {
+        grid-template-columns: 1fr;
+      }
+      .detail-page .detail-right {
+        overflow-y: visible;
+        padding-right: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="detail-page" id="detail-page">
+    <!-- Back button -->
+    <button class="detail-back" id="detail-back" aria-label="Retour aux projets">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Retour
+    </button>
+
+    <!-- Content injected by JS -->
+    <div class="detail-content" id="detail-content"></div>
+  </div>
+
+  <script src="js/projects-data.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      /* Read project ID from URL */
+      var params = new URLSearchParams(window.location.search);
+      var projectId = params.get('id');
+      var project = ALL_PROJECTS[projectId];
+
+      if (!project) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      /* Update page title */
+      document.title = project.title + ' — Romain SCHRIJVERS';
+
+      var page = document.getElementById('detail-page');
+
+      /* Projets suivis → fond clair / Projets réalisés → fond bleu foncé */
+      if (!project._isPerso) {
+        page.classList.add('detail-page--light');
+      }
+
+      /* Render project detail */
+      var d = project.detail;
+
+      var kpisHTML = d.kpis.map(function (kpi) {
+        return '<div class="detail-kpi">' +
+          '<div class="detail-kpi-value">' + kpi.value + '</div>' +
+          '<div class="detail-kpi-label">' + kpi.label + '</div>' +
+        '</div>';
+      }).join('');
+
+      var technosHTML = d.technos.map(function (t) {
+        return '<li class="detail-stack-chip">' + t + '</li>';
+      }).join('');
+
+      var sentences = d.methode.split(/\.\s+|\.$/).filter(function (s) { return s.trim().length > 0; });
+      var methodItems = sentences.map(function (s) { return '<li>' + s.trim() + '.</li>'; }).join('');
+
+      var html =
+        '<div class="detail-header">' +
+          '<div class="detail-header-left">' +
+            '<p class="detail-mission">' + project.mission + '</p>' +
+            '<h2 class="detail-title">' + project.title + '</h2>' +
+            '<p class="detail-subtitle">' + project.subtitle + '</p>' +
+          '</div>' +
+          '<div class="detail-header-right">' +
+            '<img src="' + project.logo + '" alt="' + project.logoAlt + '" class="detail-logo">' +
+            '<span class="detail-category">' + d.category + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="detail-body">' +
+          '<div class="detail-left">' +
+            '<div class="detail-image-wrap">' +
+              '<div class="detail-image-glow" aria-hidden="true"></div>' +
+              '<img src="' + project.image + '" alt="' + project.title + '" class="detail-image" loading="lazy">' +
+              '<div class="detail-image-overlay" aria-hidden="true"></div>' +
+            '</div>' +
+            '<div class="detail-kpis">' + kpisHTML + '</div>' +
+          '</div>' +
+          '<div class="detail-right">' +
+            '<div class="detail-section" data-delay="1">' +
+              '<h3 class="detail-section-title">Contexte & objectif</h3>' +
+              '<p class="detail-section-text">' + d.contexte + '</p>' +
+            '</div>' +
+            '<hr class="detail-divider">' +
+            '<div class="detail-section" data-delay="2">' +
+              '<h3 class="detail-section-title">Méthode de travail</h3>' +
+              '<ul class="detail-method-list">' + methodItems + '</ul>' +
+            '</div>' +
+            '<hr class="detail-divider">' +
+            '<div class="detail-stack">' +
+              '<h4 class="detail-stack-title">Stack technique</h4>' +
+              '<ul class="detail-stack-list">' + technosHTML + '</ul>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+
+      document.getElementById('detail-content').innerHTML = html;
+
+      /* Animate in after a short delay */
+      requestAnimationFrame(function () {
+        setTimeout(function () {
+          page.classList.add('is-loaded');
+        }, 50);
+      });
+
+      /* Back button — go back to portfolio */
+      document.getElementById('detail-back').addEventListener('click', function () {
+        if (window.history.length > 1) {
+          window.history.back();
+        } else {
+          window.location.href = 'index.html';
+        }
+      });
+
+      /* Escape key */
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          if (window.history.length > 1) {
+            window.history.back();
+          } else {
+            window.location.href = 'index.html';
+          }
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
